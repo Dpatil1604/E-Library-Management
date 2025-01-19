@@ -342,7 +342,7 @@
         <!-- Submit Button -->
         <div class="text-center">
             <asp:Button cssClass="btn btn-primary btn-block btn-lg" ID="RegisterButton" runat="server" Text="Register" 
-                        style="background-color: #007BFF; color: #FFFFFF; padding: 12px 20px; border-radius: 5px; font-size: 1.1rem; font-weight: bold; width: 100%;" />
+                        style="background-color: #007BFF; color: #FFFFFF; padding: 12px 20px; border-radius: 5px; font-size: 1.1rem; font-weight: bold; width: 100%;" OnClick="RegisterButton_Click"  />
         </div>
 
         <!-- Back Link -->

@@ -191,7 +191,7 @@
         <div class="row">
             <div class="col-md-4">
                 <center>
-                    <img width="150px" src="img1/sign%20up.png" class="hover-img" />
+                    <img width="150 px" src="img1/sign%20up.png" class="hover-img" />
                     <h4 class="hover-title">Sign Up</h4>
                     <p class="text-justify hover-text">Create a personalized account to access our library’s extensive collection
                         and exclusive features. Just fill in your basic details to register. Enjoy easy tracking of your
