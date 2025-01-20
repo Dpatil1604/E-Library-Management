@@ -173,10 +173,10 @@
                 </div>
                 <label for="password" style="display: block; margin-bottom: 5px; color: #333333;">Password</label>
                 <div class="form-group">
-                    <asp:TextBox cssClass="form-control" ID="MemberTextBox2" runat="server" placeholder="Password" TextMode="Password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;" />
+                    <asp:TextBox cssClass="form-control" ID="PasswordTextBox2" runat="server" placeholder="Password" TextMode="Password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;" />
                 </div>
                 <div class="form-group">
-                    <asp:Button class="btn btn-primary btn-block btn-lg" ID="MemberLoginButton" runat="server" Text="Login" style="background-color: #1E90FF; color: white; border: none; padding: 12px 20px; border-radius: 5px; font-size: 16px; width: 100%;" />
+                    <asp:Button class="btn btn-primary btn-block btn-lg" ID="MemberLoginButton" runat="server" Text="Login" style="background-color: #1E90FF; color: white; border: none; padding: 12px 20px; border-radius: 5px; font-size: 16px; width: 100%;" OnClick="MemberLoginButton_Click" />
                 </div>
                 <!-- Sign Up Button -->
                 <div class="form-group">

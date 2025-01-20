@@ -1,56 +1,162 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace LibraryWeb1
 {
     public partial class usersignup : System.Web.UI.Page
     {
-        string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
-
-      
+        // Connection string fetched from Web.config
+        private readonly string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Add logic if needed during page load
         }
-        //sign up( register) button click event
+
+        // Sign-up (register) button click event
         protected void RegisterButton_Click(object sender, EventArgs e)
         {
-            // Response.Write("<script>alert('Testing');</script>");
+            if (CheckMemberExists())
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Member already exists with this Member ID. Please try another ID.');", true);
+            }
+            else
+            {
+                SignUpNewUser();
+            }
+        }
+
+        // Check if the member already exists in the database
+        private bool CheckMemberExists()
+        {
             try
             {
-                MySqlConnection con = new MySqlConnection(strcon);
-                if (con.State == ConnectionState.Closed)
+                using (MySqlConnection con = new MySqlConnection(strcon))
                 {
-                    con.Open();
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM elibrarydb.member_master WHERE member_id ='" + UserIDTextBox.Text.Trim() + "';", con);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count >= 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-
-                MySqlCommand cmd = new MySqlCommand(" INSERT INTO member_master( full_name ,dob ,contact_no ,email ,state ,city,pincode ,full_address ,member_id ,password ,account_status) " +
-                    "values(@full_name ,@dob ,@contact_no ,@email ,@state ,@city,@pincode ,@full_address ,@member_id ,@password ,@account_status)", con);
-                cmd.Parameters.AddWithValue("@full_name", FullNameTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@dob", DateOfBirthTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@contact_no", ContactTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@state", StateDropDownList.SelectedItem.Value());
-                cmd.Parameters.AddWithValue("@city", CityTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@pincode", PincodeTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@full_address", AddressTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@member_id ", UserIDTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@password ", PasswordTextBox.Text.Trim());
-                cmd.Parameters.AddWithValue("@account_status", "pending");
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                return false;
             }
+        }
+
+        // Insert a new user into the database
+        private void SignUpNewUser()
+        {
+            if (IsValidInput())
+            {
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(strcon))
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+
+                        string query = @"
+                            INSERT INTO member_master 
+                            (full_name, dob, contact_no, email, state, city, pincode, full_address, member_id, password, account_status) 
+                            VALUES 
+                            (@full_name, @dob, @contact_no, @email, @state, @city, @pincode, @full_address, @member_id, @password, @account_status)";
+
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@full_name", FullNameTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@dob", DateOfBirthTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@contact_no", ContactTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@email", EmailTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@state", StateDropDownList.SelectedItem.Value);
+                            cmd.Parameters.AddWithValue("@city", CityTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@pincode", PincodeTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@full_address", AddressTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@member_id", UserIDTextBox.Text.Trim());
+                            cmd.Parameters.AddWithValue("@password", PasswordTextBox.Text.Trim()); // Hash passwords in production
+                            cmd.Parameters.AddWithValue("@account_status", "pending");
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Sign Up Successful. Go to User Login to log in.');", true);
+                }
+                catch (Exception ex)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                }
+            }
+        }
+
+        // Validate user input
+        private bool IsValidInput()
+        {
+            if (string.IsNullOrWhiteSpace(FullNameTextBox.Text))
+            {
+                Alert("Full Name is required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(DateOfBirthTextBox.Text))
+            {
+                Alert("Date of Birth is required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(ContactTextBox.Text))
+            {
+                Alert("Contact Number is required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
+            {
+                Alert("Email is required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(CityTextBox.Text))
+            {
+                Alert("City Name is required");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(UserIDTextBox.Text))
+            {
+                Alert("User ID is required");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(PasswordTextBox.Text))
+            {
+                Alert("Password is required");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Helper method to display alerts
+        private void Alert(string message)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
         }
     }
 }

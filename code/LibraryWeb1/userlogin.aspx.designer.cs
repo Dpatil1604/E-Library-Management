@@ -51,13 +51,13 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox MemberTextBox1;
 
         /// <summary>
-        /// MemberTextBox2 control.
+        /// PasswordTextBox2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MemberTextBox2;
+        protected global::System.Web.UI.WebControls.TextBox PasswordTextBox2;
 
         /// <summary>
         /// MemberLoginButton control.
