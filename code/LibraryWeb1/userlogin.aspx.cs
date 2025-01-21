@@ -9,7 +9,6 @@ using System.Web.UI.WebControls;
 
 namespace LibraryWeb1
 { 
-    
     public partial class userlogin : System.Web.UI.Page
     { 
         //Connection string fetched from Web.config
@@ -36,16 +35,20 @@ namespace LibraryWeb1
                 {
                     while(dr.Read())
                     {
-                        Response.Write("<script>alert('" + dr.GetValue(8).ToString() + "');</script>");
+                        Response.Write("<script>alert('Login Successful');</script>");
+                        Session["username"] = dr.GetValue(8).ToString();
+                        Session["fullname"] = dr.GetValue(0).ToString();
+                        Session["role"] = "user";
+                        Session["status"] = dr.GetValue(10).ToString();
                     }
+                    Response.Redirect("homepage.aspx");
                 }
                 else
                 {
                     Response.Write("<script>alert('Invalid Creadentials');</script>");
+                    
                 }
               
-
-
                 }
             catch (Exception ex)
             {
