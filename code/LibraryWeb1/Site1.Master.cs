@@ -112,7 +112,34 @@ namespace LibraryWeb1
         {
             Response.Redirect("usersignup.aspx");
         }
+        // logout button
+      /*  protected void LinkButton4_Click(object sender, EventArgs e)
+        {
+            
+            Session["username"] = "";
+            Session["fullname"] = "";
+            Session["role"] = "";
+            Session["status"] = "";
 
-      
+            LinkButton2.Visible = true; //user login link button
+            LinkButton3.Visible = true;//sign up link button
+
+            LinkButton4.Visible = false;//log out link button
+            LinkButton5.Visible = false;// hello user link button
+
+            LinkButton6.Visible = true;//admin login link button
+            LinkButton7.Visible = false;//author m link button
+            LinkButton8.Visible = false;//publisher m link button
+            LinkButton9.Visible = false;//book inventory link button
+            LinkButton10.Visible = false;//book issuing link button
+            LinkButton11.Visible = false;//member m link button
+
+            Response.Redirect("homepage.aspx");
+        }*/
+        //view books page
+
+
+
+
     }
 }

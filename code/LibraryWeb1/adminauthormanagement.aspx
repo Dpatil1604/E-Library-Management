@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                      <asp:TextBox cssClass="form-control" ID="TextBox3" runat="server"  placeholder="ID"></asp:TextBox>
-                                     <asp:Button class="btn btn-primary  " ID="Button1" runat="server" Text="Go " />
+                                     <asp:Button class="btn btn-primary  " ID="Button1" runat="server" Text="Go " OnClick="Button1_Click" />
                                 </div>
                              </div>
                           </div>
@@ -52,13 +52,13 @@
 
                         <div class="row">
                             <div class="col-4 ">
-                                <asp:Button ID="Button2" class="btn btn-lg btn-block btn-success" runat="server" Text="Add"></asp:Button>   
+                                <asp:Button ID="Button2" class="btn btn-lg btn-block btn-success" runat="server" Text="Add" OnClick="Button2_Click"></asp:Button>   
                             </div>
                             <div class="col-4 ">
-                                <asp:Button ID="Button3" class="btn btn-lg btn-block btn-warning" runat="server" Text="Update"></asp:Button>   
+                                <asp:Button ID="Button3" class="btn btn-lg btn-block btn-warning" runat="server" Text="Update" OnClick="Button3_Click"></asp:Button>   
                             </div>
                             <div class="col-4 ">
-                                <asp:Button ID="Button4" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete"></asp:Button>   
+                                <asp:Button ID="Button4" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete" OnClick="Button4_Click"></asp:Button>   
                             </div>
                        </div>
                 </div>

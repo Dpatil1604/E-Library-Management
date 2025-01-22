@@ -98,14 +98,18 @@ namespace LibraryWeb1
                             cmd.Parameters.AddWithValue("@account_status", "pending");
 
                             cmd.ExecuteNonQuery();
+                            con.Close();
+                            Response.Write("<script>alert('Sign Up Successful. Go to User Login to log in.');</script>");
+
                         }
                     }
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Sign Up Successful. Go to User Login to log in.');", true);
+                    //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Sign Up Successful. Go to User Login to log in.');", true);
                 }
                 catch (Exception ex)
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                     Response.Write("<script>alert('" + ex.Message + "');</script>");
+                    // ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
                 }
             }
         }
