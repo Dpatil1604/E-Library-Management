@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,15 +6,54 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MySql.Data.MySqlClient;
+//using MySqlConnector;
 
 namespace LibraryWeb1
 {
     public partial class adminauthormanagement : System.Web.UI.Page
     {
-        private readonly string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+        //private readonly
+        string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                BindGridView();
+            }
+        }
+
+        // Method to fetch and bind data to GridView
+        private void BindGridView()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    string query = "SELECT * FROM author_master;";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+
+                            GridView1.DataSource = dt; // Bind the data to GridView
+                            GridView1.DataBind();     // Display the data
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
         }
         // add button click
         protected void Button2_Click(object sender, EventArgs e)
@@ -28,6 +66,8 @@ namespace LibraryWeb1
             {
                 addNewAuthor();
             }
+
+
         }
         //Update Button click
         protected void Button3_Click(object sender, EventArgs e)
@@ -60,10 +100,48 @@ namespace LibraryWeb1
         protected void Button1_Click(object sender, EventArgs e)
         {
 
+            getAuthorByID();
         }
 
         //user defined function
 
+        void getAuthorByID()
+        {
+            
+                try
+                {
+                    using (MySqlConnection con = new MySqlConnection(strcon))
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+
+                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM elibrarydb.author_master WHERE author_id ='" + TextBox3.Text.Trim() + "';", con);
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count >= 1)
+                        {
+                        TextBox4.Text = dt.Rows[0][1].ToString();
+                        }
+                        else
+                        {
+                        Response.Write("<script>alert('Invalid Author ID');</script>");
+                    }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    // ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                    Response.Write("<script>alert('" + ex.Message + "');</script>");
+                    
+                }
+            }
+
+        
         void deleteAuthor()
         {
             try
@@ -91,6 +169,7 @@ namespace LibraryWeb1
                         clearForm();
                     }
                 }
+                BindGridView();
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Sign Up Successful. Go to User Login to log in.');", true);
             }
             catch (Exception ex)
@@ -127,6 +206,7 @@ namespace LibraryWeb1
                         clearForm();
                     }
                 }
+                BindGridView();
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Sign Up Successful. Go to User Login to log in.');", true);
             }
             catch (Exception ex)
@@ -146,7 +226,7 @@ namespace LibraryWeb1
                     }
 
                     string query = @"
-                            INSERT INTO author_master 
+                            INSERT INTO author_master
                             (author_id,author_name)  VALUES 
                             (@author_id,@author_name)";
 
@@ -161,8 +241,9 @@ namespace LibraryWeb1
                         clearForm();
                     }
                 }
-            
-            
+                BindGridView();
+
+
 
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Sign Up Successful. Go to User Login to log in.');", true);
             }
@@ -196,6 +277,7 @@ namespace LibraryWeb1
                         return false;
                     }
                 }
+                
             }
             catch (Exception ex)
             {
