@@ -1,5 +1,40 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminmembermanagement.aspx.cs" Inherits="LibraryWeb1.adminmembermanagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+
+      <script type="text/javascript">
+            $(document).ready(function () {
+                // Fix for GridView headers
+                var table = $('#<%= GridView1.ClientID %>');
+
+        // Ensure GridView has a proper <thead> and <tbody> structure
+        table.find('thead').remove(); // Remove any existing <thead>
+        table.prepend($('<thead></thead>').append(table.find('tr:first'))); // Wrap the first row as <thead>
+
+        // Initialize DataTables with Bootstrap 5 styling
+        table.DataTable({
+            paging: true,          // Enable pagination
+            searching: true,       // Enable search
+            info: true,            // Enable entry info
+            lengthChange: true,    // Enable "Show entries"
+            autoWidth: false,      // Disable auto width for better alignment
+            responsive: true,      // Make table responsive
+            dom: '<"row"<"col-md-6"l><"col-md-6"f>>' + // Layout for length and search
+                '<"row"<"col-12"tr>>' +               // Layout for table
+                '<"row"<"col-md-5"i><"col-md-7 text-end"p>>',  // Align pagination to the right
+            language: {
+                lengthMenu: "Show _MENU_ entries",
+                search: "Search:",
+                info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                paginate: {
+                    previous: "Previous", // Replace with "Previous"
+                    next: "Next"          // Replace with "Next"
+                }
+            }
+        });
+    });
+      </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -38,7 +73,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                      <asp:TextBox cssClass="form-control " ID="TextBox3" runat="server"  placeholder="Member ID"></asp:TextBox>
-                                     <asp:LinkButton ID="LinkButton4"  class="btn btn-primary " runat="server">Go</asp:LinkButton>
+                                     <asp:LinkButton ID="LinkButton4"  class="btn btn-primary " runat="server" OnClick="LinkButton4_Click">Go</asp:LinkButton>
                                 </div>
                              </div>
                           </div>
@@ -53,9 +88,9 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                      <asp:TextBox cssClass="form-control mr-1" ID="TextBox7" runat="server"  placeholder="Account Status" ReadOnly="True"></asp:TextBox>
-                                     <asp:LinkButton ID="LinkButton1"  class="btn btn-success mr-1" runat="server"><i class="fas fa-check-circle"></i></asp:LinkButton>
-                                     <asp:LinkButton ID="LinkButton2"  class="btn btn-warning mr-1" runat="server"><i class="far fa-pause-circle"></i></asp:LinkButton>
-                                     <asp:LinkButton ID="LinkButton3"  class="btn btn-danger mr-1" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
+                                     <asp:LinkButton ID="LinkButton1"  class="btn btn-success mr-1" runat="server" OnClick="LinkButton1_Click"><i class="fas fa-check-circle"></i></asp:LinkButton>
+                                     <asp:LinkButton ID="LinkButton2"  class="btn btn-warning mr-1" runat="server" OnClick="LinkButton2_Click" style="height: 2px" ><i class="far fa-pause-circle"></i></asp:LinkButton>
+                                     <asp:LinkButton ID="LinkButton3"  class="btn btn-danger mr-1" runat="server" OnClick="LinkButton3_Click"><i class="fas fa-times-circle"></i></asp:LinkButton>
 
                                     </div> 
                              </div>
@@ -129,7 +164,7 @@
 
                         <div class="row">
                             <div class="col-8 mx-auto">
-                                <asp:Button ID="Button2" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete User Permanently"></asp:Button>   
+                                <asp:Button ID="Button2" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete User Permanently" OnClick="Button2_Click"></asp:Button>   
                             </div>
                             
                             
@@ -160,7 +195,22 @@
 
                          <div class="row">
                             <div class="col">
-                                <asp:GridView class="table table-striped table-bordered" ID ="GridView1" runat="server"></asp:GridView>
+                                
+                                <asp:GridView CssClass="table table-striped table-bordered" ID="GridView1" runat="server" AutoGenerateColumns="false">
+                                    <Columns>
+                                        <asp:BoundField DataField="member_id" HeaderText="Member ID" />
+                                        <asp:BoundField DataField="full_name" HeaderText="Name" />
+                                        <asp:BoundField DataField="contact_no" HeaderText="Contact" />
+                                        <asp:BoundField DataField="email" HeaderText="E-mail" />
+                                        <asp:BoundField DataField="state" HeaderText="State" />
+                                           <asp:BoundField DataField="city" HeaderText="City" />
+                                        <asp:BoundField DataField="account_status" HeaderText="Account Status" />
+        
+                                   </Columns>
+                                 </asp:GridView>
+
+                               
+
                             </div>
                         </div>
 

@@ -11,7 +11,7 @@ namespace LibraryWeb1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          /*  try
+           try
             {      // When no one is logged in, everything will default
                 if (Session["role"] == null || Session["role"].Equals(""))
                 {
@@ -64,8 +64,8 @@ namespace LibraryWeb1
             }
             catch(Exception ex)
             {
-                Response.Write("<script>alert('" + ex.Message + "');</script>");
-            }*/
+              //  Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
         }
 
         protected void LinkButton6_Click(object sender, EventArgs e)
