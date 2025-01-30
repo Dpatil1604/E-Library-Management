@@ -179,6 +179,13 @@
     <Content Include="adminlogin.aspx" />
     <Content Include="adminmembermanagement.aspx" />
     <Content Include="adminpublishermanagement.aspx" />
+    <Content Include="book_inventory\b1.jfif" />
+    <Content Include="book_inventory\b2.jpg" />
+    <Content Include="book_inventory\b3.jpg" />
+    <Content Include="book_inventory\b4.jpg" />
+    <Content Include="book_inventory\b5.jpg" />
+    <Content Include="book_inventory\b6.jpg" />
+    <Content Include="book_inventory\b7.jpg" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />

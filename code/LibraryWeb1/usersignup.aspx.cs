@@ -66,6 +66,14 @@ namespace LibraryWeb1
         // Insert a new user into the database
         private void SignUpNewUser()
         {
+            string username = UserIDTextBox.Text.Trim().ToLower();
+
+            // Prevent "admin" or similar usernames from signing up
+            if (username == "admin" || username.Contains("admin"))
+            {
+                Response.Write("<script>alert('You cannot use \"admin\" in the username. Please choose another username.');</script>");
+                return;
+            }
             if (IsValidInput())
             {
                 try

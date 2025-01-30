@@ -1,6 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminbookinventory.aspx.cs" Inherits="LibraryWeb1.adminbookinventory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <script type="text/javascript">
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+
+                reader.onload = function (e) {
+                    $('#imgview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            }
+        }
+
+</script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -21,7 +40,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img width="100px" src="img2/user.png" />
+                                    <img id="imgview" width="100px" src="img2/user.png" />
                                 </center>
                             </div>
                         </div>
@@ -33,7 +52,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <asp:FileUpload class="form-control" ID="FileUpload1" runat="server" />
+                                <asp:FileUpload  onchange="readURL(this);" class="form-control" ID="FileUpload1" runat="server" />
                             </div>
                         </div>
 
@@ -43,7 +62,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <asp:TextBox CssClass="form-control " ID="TextBox3" runat="server" placeholder="Book ID"></asp:TextBox>
-                                        <asp:LinkButton ID="LinkButton4" class="btn btn-primary " runat="server">Go</asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton4" class="btn btn-primary " runat="server" >Go</asp:LinkButton>
                                     </div>
                                 </div>
                             </div>
@@ -89,8 +108,6 @@
                                         <asp:ListItem Text="a2" Value="a2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-
-
 
                                 <label>Publisher Date</label>
                                 <div class="form-group">
@@ -182,14 +199,14 @@
                                 <div class="col-md-4">
                                     <label>Current Stock</label>
                                     <div class="form-group">
-                                        <asp:TextBox class="form-control" ID="TextBox6" runat="server" placeholder="Current Stock" TextMode="Number" ReadOnly="True" ></asp:TextBox>
+                                        <asp:TextBox class="form-control" ID="TextBox6" runat="server" placeholder="Current Stock" TextMode="Number" ReadOnly="True" >Book Cost(per unit)</asp:TextBox>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label>Issued Books</label>
                                     <div class="form-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox7" runat="server" placeholder="Issued Books" TextMode="Number" ReadOnly="True" ></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox7" runat="server" placeholder="Issued Books" TextMode="Number" ReadOnly="True" >Pages</asp:TextBox>
                                     </div>
                                 </div>
 
@@ -210,13 +227,14 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <asp:Button ID="Button1" class="btn btn-lg btn-block btn-success" runat="server" Text="Add"></asp:Button>
+                                   <asp:Button ID="Button1" class="btn btn-lg btn-block btn-success" runat="server" Text="Add" OnClick="Button1_Click"></asp:Button>
+
                                 </div>
                                 <div class="col-4">
                                     <asp:Button ID="Button2" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete "></asp:Button>
                                 </div>
                                 <div class="col-4">
-                                    <asp:Button ID="Button3" class="btn btn-lg btn-block btn-warning" runat="server" Text="Update "></asp:Button>
+                                    <asp:Button ID="Button3" class="btn btn-lg btn-block btn-warning" runat="server" Text="Update " ></asp:Button>
                                 </div>
 
 

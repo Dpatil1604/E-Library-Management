@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace LibraryWeb1
 {
@@ -11,60 +8,66 @@ namespace LibraryWeb1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           try
-            {      // When no one is logged in, everything will default
-                if (Session["role"] == null || Session["role"].Equals(""))
-                {
-                    LinkButton2.Visible = true; //user login link button
-                    LinkButton3.Visible = true;//sign up link button
-
-                    LinkButton4.Visible = false;//log out link button
-                    LinkButton5.Visible = false;// hello user link button
-
-                    LinkButton6.Visible = true;//admin login link button
-                    LinkButton7.Visible = false;//author m link button
-                    LinkButton8.Visible = false;//publisher m link button
-                    LinkButton9.Visible = false;//book inventory link button
-                    LinkButton10.Visible = false;//book issuing link button
-                    LinkButton11.Visible = false;//member m link button
-                }
-                else if(Session["role"].Equals("user"))
-                {
-                    LinkButton2.Visible = false; //user login link button
-                    LinkButton3.Visible = false;//sign up link button
-
-                    LinkButton4.Visible = true;//log out link button
-                    LinkButton5.Visible = true;// hello user link button
-                    LinkButton5.Text = "Hello " +Session["username"].ToString();
-
-                    LinkButton6.Visible = true;//admin login link button
-                    LinkButton7.Visible = false;//author m link button
-                    LinkButton8.Visible = false;//publisher m link button
-                    LinkButton9.Visible = false;//book inventory link button
-                    LinkButton10.Visible = false;//book issuing link button
-                    LinkButton11.Visible = false;//member m link button
-                }
-                else if (Session["role"].Equals("admin"))
-                {
-                    LinkButton2.Visible = false; //user login link button
-                    LinkButton3.Visible = false;//sign up link button
-
-                    LinkButton4.Visible = true;//log out link button
-                    LinkButton5.Visible = true;// hello user link button
-                    LinkButton5.Text = "Hello Admin" ;
-
-                    LinkButton6.Visible = false;//admin login link button
-                    LinkButton7.Visible = true;//author m link button
-                    LinkButton8.Visible = true;//publisher m link button
-                    LinkButton9.Visible = true;//book inventory link button
-                    LinkButton10.Visible = true;//book issuing link button
-                    LinkButton11.Visible = true;//member m link button
-                }
-
-            }
-            catch(Exception ex)
+            try
             {
-              //  Response.Write("<script>alert('" + ex.Message + "');</script>");
+                // Debug: Check what role is stored in session
+                Response.Write("<script>console.log('Role: " + Session["role"] + "');</script>");
+
+                if (Session["role"] == null || string.IsNullOrEmpty(Session["role"].ToString()))
+                {
+                    // User is not logged in
+                    LinkButton2.Visible = true;  // user login link button
+                    LinkButton3.Visible = true;  // sign-up link button
+                    LinkButton4.Visible = false; // log out link button
+                    LinkButton5.Visible = false; // hello user link button
+                    LinkButton6.Visible = true;  // admin login link button
+
+                    // Hide admin management buttons
+                    LinkButton7.Visible = false;
+                    LinkButton8.Visible = false;
+                    LinkButton9.Visible = false;
+                    LinkButton10.Visible = false;
+                    LinkButton11.Visible = false;
+                }
+                else if (Session["role"].ToString() == "user")
+                {
+                    // Regular user logged in
+                    LinkButton2.Visible = false;
+                    LinkButton3.Visible = false;
+                    LinkButton4.Visible = true;
+                    LinkButton5.Visible = true;
+                    LinkButton5.Text = "Hello " + Session["username"].ToString();
+                    LinkButton6.Visible = true;
+
+                    // Hide admin management buttons
+                    LinkButton7.Visible = false;
+                    LinkButton8.Visible = false;
+                    LinkButton9.Visible = false;
+                    LinkButton10.Visible = false;
+                    LinkButton11.Visible = false;
+                }
+                else if (Session["role"].ToString() == "admin")
+                {
+                    // Admin logged in
+                    LinkButton2.Visible = false;
+                    LinkButton3.Visible = false;
+                    LinkButton4.Visible = true;
+                    LinkButton5.Visible = true;
+                    LinkButton5.Text = "Hello Admin";
+
+                    // Show admin management buttons
+                    LinkButton6.Visible = false; // Hide admin login button after login
+                    LinkButton7.Visible = true;
+                    LinkButton8.Visible = true;
+                    LinkButton9.Visible = true;
+                    LinkButton10.Visible = true;
+                    LinkButton11.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
         }
 
@@ -72,7 +75,7 @@ namespace LibraryWeb1
         {
             Response.Redirect("adminlogin.aspx");
         }
-        
+
         protected void LinkButton7_Click(object sender, EventArgs e)
         {
             Response.Redirect("adminauthormanagement.aspx");
@@ -103,43 +106,44 @@ namespace LibraryWeb1
             Response.Redirect("userlogin.aspx");
         }
 
+        protected void LinkButton3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("usersignup.aspx");
+        }
+
+        protected void LinkButton4_Click(object sender, EventArgs e)
+        {
+            // Logout functionality
+            Session["username"] = null;
+            Session["fullname"] = null;
+            Session["role"] = null;
+
+            // Optionally, abandon the session completely
+            Session.Abandon();
+
+            // Reset UI elements visibility
+            LinkButton2.Visible = true;   // user login link button
+            LinkButton3.Visible = true;   // sign-up link button
+            LinkButton4.Visible = false;  // log out link button
+            LinkButton5.Visible = false;  // hello user link button
+            LinkButton6.Visible = true;   // admin login link button
+
+            // Hide admin management buttons
+            LinkButton7.Visible = false;
+            LinkButton8.Visible = false;
+            LinkButton9.Visible = false;
+            LinkButton10.Visible = false;
+            LinkButton11.Visible = false;
+
+            // Redirect to homepage
+            Response.Redirect("homepage.aspx");
+        }
+
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewbooks.aspx");
         }
 
-        protected void LinkButton3_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("usersignup.aspx");
-        }
-        // logout button
-      /*  protected void LinkButton4_Click(object sender, EventArgs e)
-        {
-            
-            Session["username"] = "";
-            Session["fullname"] = "";
-            Session["role"] = "";
-            Session["status"] = "";
-
-            LinkButton2.Visible = true; //user login link button
-            LinkButton3.Visible = true;//sign up link button
-
-            LinkButton4.Visible = false;//log out link button
-            LinkButton5.Visible = false;// hello user link button
-
-            LinkButton6.Visible = true;//admin login link button
-            LinkButton7.Visible = false;//author m link button
-            LinkButton8.Visible = false;//publisher m link button
-            LinkButton9.Visible = false;//book inventory link button
-            LinkButton10.Visible = false;//book issuing link button
-            LinkButton11.Visible = false;//member m link button
-
-            Response.Redirect("homepage.aspx");
-        }*/
-        //view books page
-
-
-
-
+       
     }
 }

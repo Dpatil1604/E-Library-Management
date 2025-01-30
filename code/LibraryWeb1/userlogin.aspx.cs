@@ -21,6 +21,14 @@ namespace LibraryWeb1
         //user login
         protected void MemberLoginButton_Click(object sender, EventArgs e)
         {
+            string username = MemberTextBox1.Text.Trim().ToLower();
+
+            // Block "admin" login from user panel
+            if (username == "admin")
+            {
+                Response.Write("<script>alert('Admin login is restricted from user login page!');</script>");
+                return;
+            }
             try
             {
                 MySqlConnection con = new MySqlConnection(strcon);

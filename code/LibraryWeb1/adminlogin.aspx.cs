@@ -1,56 +1,65 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace LibraryWeb1
 {
     public partial class adminlogin : System.Web.UI.Page
     {
-        //Connection string fetched from Web.config
+        // Fetch connection string from Web.config
         private readonly string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
+
         protected void MemberLoginButton_Click(object sender, EventArgs e)
         {
             try
             {
-                MySqlConnection con = new MySqlConnection(strcon);
-                if (con.State == System.Data.ConnectionState.Closed)
+                using (MySqlConnection con = new MySqlConnection(strcon))
                 {
-                    con.Open();
-                }
+                    con.Open(); // Open MySQL connection
 
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM elibrarydb.admin_login where  member_id='" + MemberTextBox1.Text.Trim() + "' AND password='" + PasswordTextBox2.Text.Trim() + "';", con);
-                MySqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
+                    // Secure query using parameters
+                    string query = "SELECT username, full_name FROM elibrarydb.admin_login WHERE username = @username AND password = @password";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        // Response.Write("<script>alert('" + dr.GetValue(0).ToString() + "');</script>");
-                        Session["username"] = dr.GetValue(0).ToString();
-                        Session["fullname"] = dr.GetValue(2).ToString();
-                        Session["role"] = "admin";
-                        
+                        cmd.Parameters.AddWithValue("@username", MemberTextBox1.Text.Trim());
+                        cmd.Parameters.AddWithValue("@password", PasswordTextBox2.Text.Trim());
+
+                        using (MySqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows) // If user exists
+                            {
+                                while (dr.Read())
+                                {
+                                    // Store login details in Session variables
+                                    Session["username"] = dr["username"].ToString();
+                                    Session["fullname"] = dr["full_name"].ToString();
+                                    Session["role"] = "admin";
+                                }
+
+                                // Ensure session is saved before redirecting
+                                Session.Timeout = 30; // Session expires after 30 minutes
+                                Response.Redirect("homepage.aspx", false);
+                                Context.ApplicationInstance.CompleteRequest();
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Invalid Credentials');</script>");
+                            }
+                        }
                     }
-                    Response.Redirect("homepage.aspx");
-                }
-                else
-                {
-                    Response.Write("<script>alert('Invalid Creadentials');</script>");
                 }
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('"+ex.Message+"');</script>");
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
-            //  ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Sign Up Successful.');", true);
         }
     }
 }
