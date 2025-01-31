@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using MySql.Data.MySqlClient;
 using System.Web.UI.WebControls;
+using System.Linq;
 
 namespace LibraryWeb1
 {
@@ -52,7 +53,7 @@ namespace LibraryWeb1
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
         }
-        
+
         //add
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -152,58 +153,106 @@ namespace LibraryWeb1
         {
             try
             {
-                string genres = "";
-                foreach (ListItem item in ListBox1.Items)
-                {
-                    if (item.Selected)
-                    {
-                        genres += item.Value + ",";
-                    }
-                }
-                genres = genres.TrimEnd(',');
+                // Fetch selected genres
+                string genres = string.Join(",", ListBox1.Items.Cast<ListItem>()
+                                                  .Where(item => item.Selected)
+                                                  .Select(item => item.Text));
 
-                string filepath = "~/book_inventory/default.png";
-                string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
-                if (filename != "")
+                if (string.IsNullOrEmpty(genres))
                 {
+                    Response.Write("<script>alert('Please select at least one genre.');</script>");
+                    return;
+                }
+
+                // File Upload Validation
+                string filepath = "~/book_inventory/book.png";
+                if (FileUpload1.HasFile)
+                {
+                    string fileExtension = Path.GetExtension(FileUpload1.FileName).ToLower();
+                    if (fileExtension != ".jpg" && fileExtension != ".png" && fileExtension != ".jpeg")
+                    {
+                        Response.Write("<script>alert('Only JPG, JPEG, and PNG files are allowed.');</script>");
+                        return;
+                    }
+
+                    string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
                     FileUpload1.SaveAs(Server.MapPath("book_inventory/" + filename));
                     filepath = "~/book_inventory/" + filename;
                 }
+                else
+                {
+                    Response.Write("<script>alert('Please select a file to upload.');</script>");
+                    return;
+                }
+
 
                 using (MySqlConnection con = new MySqlConnection(strcon))
                 {
-                    con.Open();
-                    string query = "INSERT INTO book_master (book_id, book_name, language, publisher_name, author_name, publisher_date, genre, edition, book_cost, pages, actual_stock, current_stock, issued_books, book_description, book_img_link) " +
-                                   "VALUES (@book_id, @book_name, @language, @publisher_name, @author_name, @publisher_date, @genre, @edition, @book_cost, @pages, @actual_stock, @current_stock, @issued_books, @book_description, @book_img_link)";
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
 
-                    MySqlCommand cmd = new MySqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@book_id", TextBox3.Text.Trim());
-                    cmd.Parameters.AddWithValue("@book_name", TextBox4.Text.Trim());
-                    cmd.Parameters.AddWithValue("@language", DropDownList1.SelectedItem.Value);
-                    cmd.Parameters.AddWithValue("@publisher_name", DropDownList2.SelectedItem.Value);
-                    cmd.Parameters.AddWithValue("@author_name", DropDownList3.SelectedItem.Value);
-                    cmd.Parameters.AddWithValue("@publisher_date", TextBox1.Text.Trim());
-                    cmd.Parameters.AddWithValue("@genre", genres);
-                    cmd.Parameters.AddWithValue("@edition", TextBox9.Text.Trim());
-                    cmd.Parameters.AddWithValue("@book_cost", TextBox10.Text.Trim());
-                    cmd.Parameters.AddWithValue("@pages", TextBox11.Text.Trim());
-                    cmd.Parameters.AddWithValue("@actual_stock", TextBox2.Text.Trim());
-                    cmd.Parameters.AddWithValue("@current_stock", TextBox2.Text.Trim()); // Initial stock = actual stock
-                    cmd.Parameters.AddWithValue("@issued_books", "0"); // Default to 0
-                    cmd.Parameters.AddWithValue("@book_description", TextBox5.Text.Trim());
-                    cmd.Parameters.AddWithValue("@book_img_link", filepath);
+                    string query = @"INSERT INTO book_master(book_id, book_name, genre, publisher_name, author_name, publish_date, language, edition, book_cost, no_of_pages, actual_stock, current_stock, book_description, book_img_link) 
+                    VALUES (@book_id, @book_name, @genre, @publisher_name, @author_name, @publish_date, @language, @edition, @book_cost, @no_of_pages, @actual_stock, @current_stock, @book_description, @book_img_link)";
 
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@book_id", TextBox3.Text.Trim());
+                        cmd.Parameters.AddWithValue("@book_name", TextBox4.Text.Trim());
+                        cmd.Parameters.AddWithValue("@genre", genres);
+                        cmd.Parameters.AddWithValue("@author_name", DropDownList3.SelectedItem.Value);
+                        cmd.Parameters.AddWithValue("@publisher_name", DropDownList2.SelectedItem.Value);
 
-                    Response.Write("<script>alert('Book Added Successfully');</script>");
-                    BindGridView(); // Refresh the book inventory list
+                        // Validate and format publish date
+                        DateTime publishDate;
+                        if (DateTime.TryParse(TextBox1.Text.Trim(), out publishDate))
+                        {
+                            cmd.Parameters.AddWithValue("@publish_date", publishDate.ToString("yyyy-MM-dd"));
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Invalid Publish Date');</script>");
+                            return;
+                        }
+
+                        cmd.Parameters.AddWithValue("@language", DropDownList1.SelectedItem.Value);
+                        cmd.Parameters.AddWithValue("@edition", TextBox9.Text.Trim());
+                        cmd.Parameters.AddWithValue("@book_cost", TextBox10.Text.Trim());
+                        cmd.Parameters.AddWithValue("@no_of_pages", TextBox11.Text.Trim());
+                        cmd.Parameters.AddWithValue("@book_description", TextBox5.Text.Trim());
+                        cmd.Parameters.AddWithValue("@actual_stock", TextBox2.Text.Trim());
+                        cmd.Parameters.AddWithValue("@current_stock", TextBox2.Text.Trim());
+                        cmd.Parameters.AddWithValue("@book_img_link", filepath);
+
+                        // Debugging output
+                        //string debugQuery = $"INSERT INTO book_master(book_id, book_name, genre, publisher_name, author_name, publish_date, language, edition, book_cost, no_of_pages, actual_stock, current_stock, book_description, book_img_link) VALUES ('{TextBox3.Text.Trim()}', '{TextBox4.Text.Trim()}', '{genres}', '{DropDownList2.SelectedItem.Value}', '{DropDownList3.SelectedItem.Value}', '{publishDate.ToString("yyyy-MM-dd")}', '{DropDownList1.SelectedItem.Value}', '{TextBox9.Text.Trim()}', '{TextBox10.Text.Trim()}', '{TextBox11.Text.Trim()}', '{TextBox2.Text.Trim()}', '{TextBox2.Text.Trim()}', '{TextBox5.Text.Trim()}', '{filepath}');";
+                       // Response.Write("<script>alert('" + debugQuery.Replace("'", "\\'") + "');</script>");
+
+
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+
+                        Response.Write("<script>alert('Book Added Successfully');</script>");
+                    }
                 }
+
+                BindGridView();
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                Response.Write("<script>alert('Error: " + ex.ToString() + "');</script>");
             }
         }
     }
-}
+}   
+
+
+
+
+
+           
+
+                    
+        
+    

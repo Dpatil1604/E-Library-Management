@@ -40,8 +40,9 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img id="imgview" width="100px" src="img2/user.png" />
+                                    <img id="imgview" width="100px" src="book_inventory/book.png" />
                                 </center>
+                                
                             </div>
                         </div>
 

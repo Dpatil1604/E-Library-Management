@@ -186,6 +186,7 @@
     <Content Include="book_inventory\b5.jpg" />
     <Content Include="book_inventory\b6.jpg" />
     <Content Include="book_inventory\b7.jpg" />
+    <Content Include="book_inventory\book.png" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
