@@ -144,6 +144,9 @@ namespace LibraryWeb1
             Response.Redirect("viewbooks.aspx");
         }
 
-       
+        protected void LinkButton5_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("userprofile.aspx");
+        }
     }
 }

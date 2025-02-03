@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,9 +12,411 @@ namespace LibraryWeb1
 {
     public partial class adminbookIssuing : System.Web.UI.Page
     {
+        string strcon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                BindGridView();
+            }
+        }
+
+        private void BindGridView()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    string query = "SELECT * FROM book_issue;";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+
+                            GridView1.DataSource = dt; // Using your specified GridView ID
+                            GridView1.DataBind();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
+        }
+        //go button
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            getnames();
 
         }
+        //issue button
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            // Validate book existence and member existence before checking issue entry
+            if (checkIfBookExist() && checkIfMemberExist())
+            {
+                // Check if the book has already been issued to the same member
+                if (checkIfIssueEntryExist())
+                {
+                    // Inform the user if the book has already been issued
+                    Response.Write("<script>alert('This Member Already has this book.');</script>");
+                }
+                else
+                {
+                    // Issue the book to the member
+                    issueBook();
+                }
+            }
+            else
+            {
+                // If the book or member does not exist
+                Response.Write("<script>alert('Wrong Book ID or Member ID');</script>");
+            }
+        }
+
+        //delete button
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+
+            if (checkIfBookExist() && checkIfMemberExist())
+            {
+                // Check if the book has already been issued to the same member
+                if (checkIfIssueEntryExist())
+                {
+                    returnBook();
+                }
+                else
+                {
+                    Response.Write("<script>alert('This Entry Does not Exists');</script>");
+
+
+                }
+            }
+            else
+            {
+                // If the book or member does not exist
+                Response.Write("<script>alert('Wrong Book ID or Member ID');</script>");
+            }
+
+        }
+        //user defined function
+
+
+        void returnBook()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    // Delete issued book entry
+                    MySqlCommand cmd = new MySqlCommand("DELETE FROM book_issue WHERE book_id = @bookId AND member_id = @memberId", con);
+                    cmd.Parameters.AddWithValue("@bookId", TextBox3.Text.Trim());
+                    cmd.Parameters.AddWithValue("@memberId", TextBox4.Text.Trim());
+
+                    int result = cmd.ExecuteNonQuery(); // Execute delete query
+
+                    if (result > 0)  // If deletion is successful
+                    {
+                        // Update current_stock in book_master
+                        cmd = new MySqlCommand("UPDATE book_master SET current_stock = current_stock+1 WHERE book_id = @bookId", con);
+                        cmd.Parameters.AddWithValue("@bookId", TextBox3.Text.Trim());
+                        cmd.ExecuteNonQuery(); // Execute stock update
+
+                        Response.Write("<script>alert('Book Returned Successfully');</script>");
+                        clearForm();
+                        // Refresh GridView after successful deletion
+                        BindGridView();
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('This Entry Does Not Exist');</script>");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
+
+
+
+        }
+
+        void issueBook()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    // First query to insert the book issue details
+                    string query = @"
+                INSERT INTO book_issue
+                (member_id, member_name, book_id, book_name, issue_date, due_date)  
+                VALUES 
+                (@member_id, @member_name, @book_id, @book_name, @issue_date, @due_date)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@member_id", TextBox4.Text.Trim());
+                        cmd.Parameters.AddWithValue("@member_name", TextBox1.Text.Trim());
+                        cmd.Parameters.AddWithValue("@book_id", TextBox3.Text.Trim());
+                        cmd.Parameters.AddWithValue("@book_name", TextBox2.Text.Trim());
+                        cmd.Parameters.AddWithValue("@issue_date", TextBox5.Text.Trim());
+                        cmd.Parameters.AddWithValue("@due_date", TextBox6.Text.Trim());
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // Corrected the issue with declaring query twice. Now using a new variable for the update query.
+                    string updateQuery = "UPDATE elibrarydb.book_master SET current_stock = current_stock - 1 WHERE book_id = @book_id";
+
+                    using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, con))
+                    {
+                        updateCmd.Parameters.AddWithValue("@book_id", TextBox3.Text.Trim());
+                        updateCmd.ExecuteNonQuery();
+                    }
+
+                    con.Close();
+                    Response.Write("<script>alert('Book Issued Successfully');</script>");
+
+                    
+                    clearForm();
+                }
+
+                BindGridView();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
+        }
+
+        bool checkIfBookExist()
+        {
+            try
+            {
+                MySqlConnection con = new MySqlConnection(strcon);
+                if (con.State == System.Data.ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM elibrarydb.book_master WHERE book_id=@bookId AND current_stock > 0", con);
+                cmd.Parameters.AddWithValue("@bookId", TextBox3.Text.Trim());  // Use parameterized query
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)  // Check if the query returned any rows
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Optionally log or display exception message for debugging
+                return false;
+            }
+        }
+
+
+        bool checkIfMemberExist()
+        {
+            try
+            {
+                MySqlConnection con = new MySqlConnection(strcon);
+                if (con.State == System.Data.ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+
+                MySqlCommand cmd = new MySqlCommand(" SELECT full_name FROM elibrarydb.member_master WHERE member_id = @memberId", con);
+                cmd.Parameters.AddWithValue("@memberId", TextBox4.Text.Trim());  // Use parameterized query
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)  // Check if the query returned any rows
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Optionally log or display exception message for debugging
+                return false;
+            }
+        }
+
+
+
+        bool checkIfIssueEntryExist()
+        {
+            try
+            {
+                MySqlConnection con = new MySqlConnection(strcon);
+                if (con.State == System.Data.ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                // Check if there is an existing entry for the same member and book that is not yet returned (i.e., active issue)
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM elibrarydb.book_issue WHERE member_id = @memberId AND book_id = @bookId", con);
+                cmd.Parameters.AddWithValue("@memberId", TextBox4.Text.Trim());
+                cmd.Parameters.AddWithValue("@bookId", TextBox3.Text.Trim());  // Use parameterized query
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)  // If there's an active issue entry (book is not returned)
+                    {
+                        return true;  // Issue entry already exists
+                    }
+                    else
+                    {
+                        return false;  // No existing issue entry
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Optionally log or display exception message for debugging
+                return false;
+            }
+        }
+
+
+        void getnames()
+        {
+            try
+            {
+                MySqlConnection con = new MySqlConnection(strcon);
+                if (con.State == System.Data.ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM elibrarydb.book_master WHERE book_id=@bookId", con);
+                cmd.Parameters.AddWithValue("@bookId", TextBox3.Text.Trim());  // Use parameterized query
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    if (dt.Rows.Count >= 1)
+                    {
+                        TextBox2.Text = dt.Rows[0]["book_name"].ToString();
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Wrong Book ID');</script>");
+                    }
+                }
+
+                cmd = new MySqlCommand("SELECT full_name FROM elibrarydb.member_master WHERE member_id=@memberId", con);
+                cmd.Parameters.AddWithValue("@memberId", TextBox4.Text.Trim());  // Use parameterized query
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    if (dt.Rows.Count >= 1)
+                    {
+                        TextBox1.Text = dt.Rows[0]["full_name"].ToString(); // Corrected the field name to "full_name"
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Wrong User ID');</script>");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Optionally log or display exception message for debugging
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
+        }
+
+
+        void clearForm()
+        {
+            // Clearing the TextBox values
+            TextBox1.Text = string.Empty;  // Member Name
+            TextBox2.Text = string.Empty;  // Book Name
+            TextBox3.Text = string.Empty;  // Book ID
+            TextBox4.Text = string.Empty;  // Member ID
+            TextBox5.Text = string.Empty;  // Issue Date
+            TextBox6.Text = string.Empty;  // Due Date
+
+
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                // Ensure the row is a data row
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    // Assuming the "due_date" is in the 5th column, adjust if necessary
+                    string dueDateString = e.Row.Cells[5].Text; // Adjust the index based on where your due_date is
+
+                    // Validate and parse the due date string
+                    if (!string.IsNullOrEmpty(dueDateString))
+                    {
+                        DateTime dueDate;
+                        if (DateTime.TryParse(dueDateString, out dueDate)) // Ensure proper date parsing
+                        {
+                            DateTime today = DateTime.Today; // Current date without time
+
+                            // If the due date has passed, change the row color
+                            if (today > dueDate)
+                            {
+                                e.Row.BackColor = System.Drawing.Color.PaleVioletRed; // Highlight overdue rows
+                            }
+                        }
+                        else
+                        {
+                            // Optionally, handle invalid date formats by setting a default color or alerting
+                            e.Row.BackColor = System.Drawing.Color.LightYellow; // Invalid date formatting
+                        }
+                    }
+                    else
+                    {
+                        // Handle empty due_date fields if necessary
+                        e.Row.BackColor = System.Drawing.Color.LightYellow; // For empty due_date
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or display the exception message for debugging
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
+        }
+
+
     }
 }
