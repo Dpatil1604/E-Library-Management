@@ -61,7 +61,10 @@
                                 <center>
                                     <h4>Your Profile</h4>
                                     <span>Account Status - </span>
-                                    <asp:Label class="badge badge-pill badge-info" ID="Label1" runat="server" Text="Your Status"></asp:Label>
+                                    <asp:Label ID="Label1" runat="server" CssClass="badge badge-pill badge-info"  Text="Your Status"></asp:Label>
+
+
+
                                 </center>
                             </div>
                         </div>
@@ -222,7 +225,8 @@
                             <div class="col-md-4">
                                     <label>Old Password</label>
                                 <div class="form-group">
-                                    <asp:TextBox class="form-control"  ID="TextBox2" runat="server"   placeholder="Password"  TextMode="Password" ReadOnly="True"></asp:TextBox>
+                                    <asp:TextBox class="form-control"  ID="TextBox2" runat="server"   placeholder=" Old Password" ReadOnly="True"></asp:TextBox>
+
                                 </div>
                             </div>
                        
@@ -292,22 +296,6 @@
                             </div>
                         </div>
 
-
-
-                        
-
-
-
-                       
-
-                           
-
-
-                       
-                        
-                     
-
-                      
 
                     </div>
                 </div>

@@ -89,7 +89,7 @@
                                     <div class="input-group">
                                      <asp:TextBox cssClass="form-control mr-1" ID="TextBox7" runat="server"  placeholder="Account Status" ReadOnly="True"></asp:TextBox>
                                      <asp:LinkButton ID="LinkButton1"  class="btn btn-success mr-1" runat="server" OnClick="LinkButton1_Click"><i class="fas fa-check-circle"></i></asp:LinkButton>
-                                     <asp:LinkButton ID="LinkButton2"  class="btn btn-warning mr-1" runat="server" OnClick="LinkButton2_Click" style="height: 2px" ><i class="far fa-pause-circle"></i></asp:LinkButton>
+                                     <asp:LinkButton ID="LinkButton2"  class="btn btn-warning mr-1" runat="server" OnClick="LinkButton2_Click"  ><i class="far fa-pause-circle text-white"></i></asp:LinkButton>
                                      <asp:LinkButton ID="LinkButton3"  class="btn btn-danger mr-1" runat="server" OnClick="LinkButton3_Click"><i class="fas fa-times-circle"></i></asp:LinkButton>
 
                                     </div> 

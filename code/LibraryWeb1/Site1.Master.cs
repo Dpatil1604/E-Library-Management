@@ -46,23 +46,27 @@ namespace LibraryWeb1
                     LinkButton10.Visible = false;
                     LinkButton11.Visible = false;
                 }
-                else if (Session["role"].ToString() == "admin")
+                else if(Session["role"].ToString() == "admin")
                 {
+
+                
                     // Admin logged in
                     LinkButton2.Visible = false;
                     LinkButton3.Visible = false;
                     LinkButton4.Visible = true;
                     LinkButton5.Visible = true;
                     LinkButton5.Text = "Hello Admin";
+                    LinkButton5.Enabled = false; // Disable the button for admin
 
                     // Show admin management buttons
-                    LinkButton6.Visible = false; // Hide admin login button after login
+                    LinkButton6.Visible = false;
                     LinkButton7.Visible = true;
                     LinkButton8.Visible = true;
                     LinkButton9.Visible = true;
                     LinkButton10.Visible = true;
                     LinkButton11.Visible = true;
                 }
+
             }
             catch (Exception ex)
             {

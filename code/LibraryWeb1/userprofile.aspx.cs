@@ -2,7 +2,6 @@
 using System;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -26,10 +25,9 @@ namespace LibraryWeb1
                 {
                     if (!IsPostBack)
                     {
-                        userbookdata(); // Load only user-specific data
-                        getuserpersonaldetail(); // Load user personal details
+                        userbookdata();
+                        getuserpersonaldetail();
                     }
-
                 }
             }
             catch (Exception ex)
@@ -38,7 +36,7 @@ namespace LibraryWeb1
                 Response.Redirect("userlogin.aspx");
             }
         }
-        //update button
+
         protected void Button1_Click(object sender, EventArgs e)
         {
             if (Session["username"] == null || string.IsNullOrEmpty(Session["username"].ToString()))
@@ -49,16 +47,11 @@ namespace LibraryWeb1
             else
             {
                 updateUserPersonalDetails();
-            
-
             }
         }
 
-        // Function to fetch only the logged-in user's issued books
-
         void getuserpersonaldetail()
         {
-
             try
             {
                 using (MySqlConnection con = new MySqlConnection(strcon))
@@ -67,9 +60,6 @@ namespace LibraryWeb1
                     {
                         con.Open();
                     }
-
-                    // Debugging: Check session username
-                    //Response.Write("<script>console.log('Session Username: " + Session["username"].ToString() + "');</script>");
 
                     string query = "SELECT * FROM member_master WHERE member_id = @memberID";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -81,44 +71,20 @@ namespace LibraryWeb1
                             DataTable dt = new DataTable();
                             da.Fill(dt);
 
-                            TextBox3.Text = dt.Rows[0]["full_name"].ToString();
-                            TextBox4.Text = dt.Rows[0]["dob"].ToString();
-
-                            TextBox5.Text = dt.Rows[0]["contact_no"].ToString();
-                            TextBox6.Text = dt.Rows[0]["email"].ToString();
-
-                            DropDownList1.SelectedValue = dt.Rows[0]["state"].ToString().Trim();
-                            TextBox8.Text = dt.Rows[0]["city"].ToString();
-
-                            TextBox9.Text = dt.Rows[0]["pincode"].ToString();
-                            TextBox7.Text = dt.Rows[0]["full_address"].ToString();
-
-                            TextBox1.Text = dt.Rows[0]["member_id"].ToString();
-                            TextBox2.Text = dt.Rows[0]["password"].ToString();
-
-
-                            Label1.Text = dt.Rows[0]["account_status"].ToString().Trim();
-
-                            if (dt.Rows[0]["account_status"].ToString().Trim() == "active")
+                            if (dt.Rows.Count > 0)
                             {
-                                Label1.Attributes.Add("class", "badge badge-pill badge-success");
+                                TextBox3.Text = dt.Rows[0]["full_name"].ToString();
+                                TextBox4.Text = dt.Rows[0]["dob"].ToString();
+                                TextBox5.Text = dt.Rows[0]["contact_no"].ToString();
+                                TextBox6.Text = dt.Rows[0]["email"].ToString();
+                                DropDownList1.SelectedValue = dt.Rows[0]["state"].ToString().Trim();
+                                TextBox8.Text = dt.Rows[0]["city"].ToString();
+                                TextBox9.Text = dt.Rows[0]["pincode"].ToString();
+                                TextBox7.Text = dt.Rows[0]["full_address"].ToString();
+                                TextBox1.Text = dt.Rows[0]["member_id"].ToString();
+                                TextBox2.Text = dt.Rows[0]["password"] != DBNull.Value ? dt.Rows[0]["password"].ToString() : "";
+                                Label1.Text = dt.Rows[0]["account_status"].ToString().Trim();
                             }
-                            else if (dt.Rows[0]["account_status"].ToString().Trim() == "pending")
-                            {
-                                Label1.Attributes.Add("class", "badge badge-pill badge-warning");
-                            }
-                            else if (dt.Rows[0]["account_status"].ToString().Trim() == "deactive")
-                            {
-                                Label1.Attributes.Add("class", "badge badge-pill badge-danger");
-                            }
-                            else
-                            {
-                                Label1.Attributes.Add("class", "badge badge-pill badge-secondary");
-                            }
-
-
-
-
                         }
                     }
                 }
@@ -127,8 +93,8 @@ namespace LibraryWeb1
             {
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
-
         }
+
         void userbookdata()
         {
             try
@@ -140,9 +106,6 @@ namespace LibraryWeb1
                         con.Open();
                     }
 
-                    // Debugging: Check session username
-                    Response.Write("<script>console.log('Session Username: " + Session["username"].ToString() + "');</script>");
-
                     string query = "SELECT * FROM book_issue WHERE member_id = @memberID";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -152,8 +115,6 @@ namespace LibraryWeb1
                         {
                             DataTable dt = new DataTable();
                             da.Fill(dt);
-
-                            // Clear previous data to avoid mixing results
                             GridView1.DataSource = null;
                             GridView1.DataSource = dt;
                             GridView1.DataBind();
@@ -167,18 +128,17 @@ namespace LibraryWeb1
             }
         }
 
-        // Function to highlight overdue books
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             try
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    string dueDateString = e.Row.Cells[5].Text.Trim(); // Adjust index if needed
+                    string dueDateString = e.Row.Cells[5].Text.Trim();
 
                     if (DateTime.TryParse(dueDateString, out DateTime dueDate))
                     {
-                        if (DateTime.Today > dueDate) // If overdue
+                        if (DateTime.Today > dueDate)
                         {
                             e.Row.BackColor = System.Drawing.Color.PaleVioletRed;
                         }
@@ -191,15 +151,13 @@ namespace LibraryWeb1
             }
         }
 
-
-
         void updateUserPersonalDetails()
         {
-            string password = string.IsNullOrWhiteSpace(TextBox10.Text) ? TextBox2.Text.Trim() : TextBox10.Text.Trim();
+            string newPassword = TextBox10.Text.Trim();
 
             try
             {
-                using (MySqlConnection con = new MySqlConnection(strcon)) // Use MySqlConnection
+                using (MySqlConnection con = new MySqlConnection(strcon))
                 {
                     if (con.State == ConnectionState.Closed)
                     {
@@ -207,10 +165,16 @@ namespace LibraryWeb1
                     }
 
                     string query = "UPDATE member_master SET full_name=@full_name, dob=@dob, contact_no=@contact_no, email=@email, " +
-                                   "state=@state, city=@city, pincode=@pincode, full_address=@full_address, password=@password, " +
-                                   "account_status=@account_status WHERE member_id=@memberID";
+                                   "state=@state, city=@city, pincode=@pincode, full_address=@full_address, account_status=@account_status";
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, con)) // Use MySqlCommand
+                    if (!string.IsNullOrWhiteSpace(newPassword))
+                    {
+                        query += ", password=@password";
+                    }
+
+                    query += " WHERE member_id=@memberID";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@full_name", TextBox3.Text.Trim());
                         cmd.Parameters.AddWithValue("@dob", TextBox4.Text.Trim());
@@ -220,17 +184,21 @@ namespace LibraryWeb1
                         cmd.Parameters.AddWithValue("@city", TextBox8.Text.Trim());
                         cmd.Parameters.AddWithValue("@pincode", TextBox9.Text.Trim());
                         cmd.Parameters.AddWithValue("@full_address", TextBox7.Text.Trim());
-                        cmd.Parameters.AddWithValue("@password", password);
-                        cmd.Parameters.AddWithValue("@account_status", "pending");
+                        cmd.Parameters.AddWithValue("@account_status", Label1.Text.Trim());
                         cmd.Parameters.AddWithValue("@memberID", Session["username"].ToString().Trim());
+
+                        if (!string.IsNullOrWhiteSpace(newPassword))
+                        {
+                            cmd.Parameters.AddWithValue("@password", newPassword);
+                        }
 
                         int result = cmd.ExecuteNonQuery();
 
                         if (result > 0)
                         {
                             Response.Write("<script>alert('Your details have been updated successfully!');</script>");
-                            getuserpersonaldetail(); // Reload updated details
-                            userbookdata(); // Refresh issued books list
+                            getuserpersonaldetail();
+                            userbookdata();
                         }
                         else
                         {
@@ -244,12 +212,5 @@ namespace LibraryWeb1
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
-
-
-
-
-
     }
-
 }
-

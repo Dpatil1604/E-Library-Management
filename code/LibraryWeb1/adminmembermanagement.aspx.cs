@@ -234,6 +234,7 @@ namespace LibraryWeb1
                     cmd.ExecuteNonQuery();
                     con.Close();
                     BindMemberGridView();
+                    getMemberByID();
                     Response.Write("<script>alert('Member Status Updated');</script>");
 
                 }

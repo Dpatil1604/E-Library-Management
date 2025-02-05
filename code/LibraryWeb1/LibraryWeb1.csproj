@@ -2275,6 +2275,7 @@
     <Content Include="fontawesome\svgs\solid\yen-sign.svg" />
     <Content Include="fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="fontawesome\svgs\solid\z.svg" />
+    <Content Include="Forgotpsw.aspx" />
     <Content Include="homepage.aspx" />
     <Content Include="img1\a1...jpg" />
     <Content Include="img1\a1.jpeg" />
@@ -2387,6 +2388,13 @@
     </Compile>
     <Compile Include="adminpublishermanagement.aspx.designer.cs">
       <DependentUpon>adminpublishermanagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forgotpsw.aspx.cs">
+      <DependentUpon>Forgotpsw.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forgotpsw.aspx.designer.cs">
+      <DependentUpon>Forgotpsw.aspx</DependentUpon>
     </Compile>
     <Compile Include="homepage.aspx.cs">
       <DependentUpon>homepage.aspx</DependentUpon>
