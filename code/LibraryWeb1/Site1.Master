@@ -140,7 +140,7 @@
         <!-- Footer -->
         <!-- Footer -->
 <footer>
-    <div id="footer1" class="container-fluid" style="background: linear-gradient(to right,  #00408f, #005fd1); color: white;">
+    <div id="footer1" class="container-fluid" style="background: linear-gradient(to right, #002e6e, #0046b4); color: white;">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <p>
@@ -159,7 +159,7 @@
             </div>
         </div>
     </div>
-   <div id="footer2" class="container-fluid" style="background: linear-gradient(to right, #002e6e, #0046b4); color: white;">
+   <%-- <div id="footer2" class="container-fluid" style="background: linear-gradient(to right, #002e6e, #0046b4); color: white;">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <p>
@@ -167,7 +167,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div>--%>
 </footer>
 
     </form>

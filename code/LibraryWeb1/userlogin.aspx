@@ -154,64 +154,134 @@
     </div>-->
 
 
-   <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-image: url('img2/bg2.png'); background-size: cover; background-position: center; font-family: Arial, sans-serif;">
-    <div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 55%; max-width: 700px; background-color: #FFFFE0; border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); padding: 20px; margin: 20px; color: #333333;">
+  <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-image: url('img2/bg2.png'); background-size: cover; background-position: center; font-family: Arial, sans-serif; position: relative;">
+    <!-- Dark Overlay Effect -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4);"></div>
+
+<div class="container" style="display: flex; align-items: center; justify-content: space-between; width: 55%; max-width: 700px; background-color: rgba(227, 242, 253, 0.4); border-radius: 0px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); padding: 20px; margin: 20px; color: #333333; backdrop-filter: blur(10px); position: relative;">
         <!-- Illustration Section -->
         <div class="illustration" style="flex: 1; text-align: center; padding: 20px;">
-            <img src="img2/l2.png" alt="Illustration" style="width: 104%; max-width: 3000px; height: auto;" />
+            <img src="img2/l2.png" alt="Illustration" style="width: 100%; max-width: 300px; height: auto; filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.2));" />
         </div>
         <!-- Member Login Form Section -->
         <div class="login-form" style="flex: 1; padding: 20px;">
             <div style="text-align: center; margin-bottom: 20px;">
-                <h3 style="color: #333333;">Member Login</h3>
+                <h3 style="color: #f0f0f0;">Member Login</h3>
             </div>
-            <hr style="border-color: #8B4513;" />
+            <hr style="border-color: #f0f0f0;" />
             <div style="margin-top: 20px;">
-                <label for="memberId" style="display: block; margin-bottom: 5px; color: #333333;">Member ID</label>
+                <label for="memberId" style="display: block; margin-bottom: 5px; color:#e0e0e0;">Member ID</label>
                 <div class="form-group">
-                    <asp:TextBox cssClass="form-control" ID="MemberTextBox1" runat="server" placeholder="Member ID" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;" />
+                    <asp:TextBox cssClass="form-control" ID="MemberTextBox1" runat="server" placeholder="Member ID" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.6); color: black;" />
                 </div>
-                <label for="password" style="display: block; margin-bottom: 5px; color: #333333;">Password</label>
+                <label for="password" style="display: block; margin-bottom: 5px; color: #e0e0e0;">Password</label>
                 <div class="form-group">
-                    <asp:TextBox cssClass="form-control" ID="PasswordTextBox2" runat="server" placeholder="Password" TextMode="Password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;" />
+                    <asp:TextBox cssClass="form-control" ID="PasswordTextBox2" runat="server" placeholder="Password" TextMode="Password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.6); color: black;" />
                 </div>
                 <div class="form-group">
-                    <asp:Button class="btn btn-primary btn-block btn-lg" ID="MemberLoginButton" runat="server" Text="Login" style="background-color: #1E90FF; color: white; border: none; padding: 12px 20px; border-radius: 5px; font-size: 16px; width: 100%;" OnClick="MemberLoginButton_Click" />
+                    <asp:Button class="btn btn-primary btn-block btn-lg" ID="MemberLoginButton" runat="server" Text="Login" style="background-color: #007bff; color: white; border: none; padding: 12px 20px; border-radius: 0px; font-size: 18px; width: 100%;" OnClick="MemberLoginButton_Click" />
                 </div>
                 <!-- Sign Up Button -->
                 <div class="form-group">
                     <a href="usersignup.aspx">
-                        <input class="btn btn-accent btn-block btn-lg" id="Button2" type="button" value="Sign Up" style="background-color: #FF7F50; color: white; border: none; padding: 12px 20px; border-radius: 5px; font-size: 16px; width: 100%;" />
+                        <input class="btn btn-accent btn-block btn-lg" id="Button2" type="button" value="Sign Up" style="background-color: #ff7043; color: white; border: none; padding: 12px 20px; border-radius: 0px; font-size: 18px; width: 100%;" />
                     </a>
                 </div>
                 <!-- Forgot Password Link -->
                 <div style="text-align: right; margin-top: 10px;">
-                    <a href="Forgotpsw.aspx" style="color: #1E90FF; text-decoration: none; font-weight: bold;">Forgot Password?</a>
+                    <a href="Forgotpsw.aspx" class="forgot-link"  style =" text-decoration: none; font-weight: bold;">Forgot Password?</a>
                 </div>
                 <!-- Back to Home Link -->
-                <a href="homepage.aspx" style="color: #1E90FF; text-decoration: none; font-weight: bold; display: block; text-align: right; margin-top: 10px;">Back to Home</a>
-              
+                <a href="homepage.aspx" class="home-link" style=" text-decoration: none; font-weight: bold; display: block; text-align: right; margin-top: 10px;">Back to Home</a>
             </div>
         </div>
     </div>
 </div>
+
 <style>
+
+
+
+
+    /* Forgot Password & Back to Home Links */
+a.forgot-link, a.home-link {
+    color: #40C4FF; /* Light Blue */
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+a.forgot-link:hover, a.home-link:hover {
+    color: #FFC107; /* Soft Yellow */
+    text-decoration: underline;
+}
+
+
     /* Attractive hover effect */
-  .form-group a {
+    .form-group a {
         text-decoration: none;
     }
-    .btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-    .btn-accent:hover {
-        background-color: #e67600;
-    }
+    /* Improve text visibility */
+h3 {
+    color: white; 
+    font-weight: bold;
+}
+
+/* Form label styling */
+label {
+    color: #f8f9fa;
+}
+
+/* Enhance input fields */
+input[type="text"], input[type="password"] {
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Button styling */
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #1E90FF;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #007bff;
+}
+
+.btn-accent {
+    background-color: #FF7F50;
+    color: white;
+}
+
+.btn-accent:hover {
+    background-color: #ff5722;
+}
+
+
+
+
+
+/* Smooth hover effect */
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
 </style>
+
+
+
 
 
 
