@@ -30,10 +30,10 @@
                 </div>
                
                 </div>
-                <!-- Forgot Password Link -->
+                <!-- Forgot Password Link 
                 <div style="text-align: right; margin-top: 10px;">
                     <a href="#" style="color: #1E90FF; text-decoration: none; font-weight: bold;">Forgot Password?</a>
-                </div>
+                </div> -->
                 <!-- Back to Home Link -->
                 <a href="homepage.aspx" style="color: #1E90FF; text-decoration: none; font-weight: bold; display: block; text-align: right;  margin-top: 10px;">Back to Home</a>
                 <br />

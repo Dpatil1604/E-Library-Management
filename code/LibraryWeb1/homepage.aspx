@@ -99,127 +99,314 @@
         </div>
     </div>
         </section>-->
-
-
+    
 
    
+   
+  
+
+
+  
+  <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-    /* Hover effect for images */
-    .hover-img:hover {
-        transform: scale(1.1);
-        transition: transform 0.3s ease;
-    }
-    
-    /* Hover effect for titles */
-    .hover-title:hover {
-        color: #007bff;
-        transition: color 0.3s ease;
-    }
 
-    /* Hover effect for paragraphs */
-    .hover-text:hover {
-        color: #555;
-        transition: color 0.3s ease;
-    }
-</style>
+.header-banner h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
 
-<section>
-    <img src="img1/p1.jpeg" class="img-fluid" width="1920" height="100">
-</section>
+.card-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 
-<section>
-    <div class="container">
+
+
+
+
+
+
+
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+
+        /* Header Banner */
+        .header-banner {
+            background: linear-gradient(135deg, #002147, #004aad);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            font-weight: 600;
+        }
+
+        .header-banner h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        .header-banner p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #002147;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Container */
+        .container {
+            padding: 50px 10%;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+            color: #002147;
+        }
+
+       .card img {
+    max-width: 100px;       /* Adjust image size as needed */
+    margin: 0 auto;         /* Center the image horizontally */
+    display: block;         /* Make the image a block-level element */
+    margin-bottom: 15px;    /* Add space below the image */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Optional: Smooth effects */
+}
+
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #002147, #004aad);
+            color: white;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+
+
+        /* Section Header Styling */
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #002147;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+/* Styling for the subheading */
+.section-header p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #555;
+    max-width: 600px;
+    margin: 10px auto 0;
+    line-height: 1.5;
+}
+
+/* Add an underline effect */
+.section-header h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: #004aad;
+    margin: 10px auto 0;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+        /* Join Us Section */
+        .join-us {
+            background: #004aad;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            margin: 50px 0;
+        }
+
+        .join-us h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .join-us p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .defaulter-list-img {
+    width: 100px; /* Increase width */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+
+
+        .sign-up-img{
+    width: 100px; /* Increase width */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+        .visit-us-img{
+    width: 100px; /* Increase width */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+
+        .search-books-img{
+    width: 100px; /* Increase width */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 5%;
+            }
+
+            .header-banner h1 {
+                font-size: 2.2rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+
+
+    <!-- Header Section -->
+    <header class="header-banner">
+        <h1>Welcome to Our Library Management System</h1>
+        <p>Manage Books, Search Easily, and Enjoy Reading</p>
+    </header>
+
+    <!-- Features Section -->
+    <section class="container">
+        <div class="section-header">
+            <h2>Our Features</h2>
+            <p>Discover the key features that make our library system efficient and user-friendly.</p>
+        </div>
         <div class="row">
-            <div class="col-12">
-                <center>
-                    <h2 class="hover-title">Our Features</h2>
-                    <p><b>Our 3 Primary Features-</b></p>
-                </center>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="img/digital-inventory.png" alt="Digital Inventory" class="img-fluid">
+                    <h4 class="card-title">Digital Book Inventory</h4>
+                    <p class="card-text">Enhance library efficiency with seamless cataloging, advanced search functionality.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="img/search-online.png" alt="Search Books"class="img-fluid">
+                    <h4 class="card-title">Search Books</h4>
+                    <p class="card-text">Discover books effortlessly by title, author, or keywords with filters for seamless browsing and convenience.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="img1/dlist.png" alt="Defaulter List" class="img-fluid defaulter-list-img">
+                    <h4 class="card-title">Defaulter List</h4>
+                    <p class="card-text">Maintain an organized defaulter list with accurate tracking, ensuring accountability and efficient library management.</p>
+                </div>
             </div>
         </div>
+    </section>
 
+    <!-- Join Us Section -->
+    <section class="join-us">
+        <h2>Join Our Library</h2>
+        <p>Become a member today and explore a vast collection of books, research materials, and exclusive events.</p>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="container my-5">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>Our library management system is designed to make your reading experience smooth and hassle-free. Follow these simple steps to get started!</p>
+
+        </div>
         <div class="row">
             <div class="col-md-4">
-                <center>
-                    <img width="150px" src="img/digital-inventory.png" class="hover-img" />
-                    <h4 class="hover-title">Digital Book Inventory</h4>
-                    <p class="text-justify hover-text">The Digital Book Inventory streamlines library management with easy cataloging,
-                        quick searches, and real-time availability updates, plus alerts for due dates and 
-                        access to digital resources. It improves accessibility and enhances the user experience.</p>
-                </center>
+                <div class="card">
+                    <img src="img1/sign%20up.png" alt="Sign Up" class="img-fluid sign-up-img">
+                    <h4 class="card-title">Sign Up</h4>
+                    <p class="card-text">Create a personalized account to seamlessly access our library’s extensive collection, exclusive resources, and advanced features</p>
+                </div>
             </div>
-
             <div class="col-md-4">
-                <center>
-                    <img width="150px" src="img/search-online.png" class="hover-img" />
-                    <h4 class="hover-title">Search Books</h4>
-                    <p class="text-justify hover-text">The Search Books feature allows users to quickly find books by title, author, or keywords, 
-                        providing filtered results for easy browsing. This enhances the library experience by saving time and helping 
-                        users locate resources efficiently.</p>
-                </center>
+                <div class="card">
+                    <img src="img/search-online.png" alt="Search Books" class="img-fluid search-books-img">
+                    <h4 class="card-title">Search Books</h4>
+                    <p class="card-text">Easily locate books with advanced filters and recommendations for a seamless and efficient library experience.</p>
+                </div>
             </div>
-
             <div class="col-md-4">
-                <center>
-                    <img width="150px" src="img1/dlist.png" class="hover-img" />
-                    <h4 class="hover-title">Defaulter List</h4>
-                    <p class="text-justify hover-text">The Defaulter List feature tracks users with overdue books, displaying their names, 
-                        due dates, and fines owed. This helps administrators manage late returns effectively and ensures timely
-                        reminders for users to avoid penalties.</p>
-                </center>
+                <div class="card">
+                    <img src="img/library.png" alt="Visit Us" class="img-fluid visit-us-img">
+                    <h4 class="card-title">Visit Us</h4>
+                    <p class="card-text">Visit our library to discover our extensive literary collection and benefit from specialized expert assistance</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section>
-    <img src="img2/bb1.png"  class="img-fluid custom-img" style="height: 250px;" width="1900">
-</section>
+    </section>
 
 
 
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <center>
-                    <h2 class="hover-title">Our Process</h2>
-                    <p><b>We have a Simple 3 Step Process</b></p>
-                </center>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <center>
-                    <img width="150 px" src="img1/sign%20up.png" class="hover-img" />
-                    <h4 class="hover-title">Sign Up</h4>
-                    <p class="text-justify hover-text">Create a personalized account to access our library’s extensive collection
-                        and exclusive features. Just fill in your basic details to register. Enjoy easy tracking of your
-                        borrowed books, due date alerts, and personalized recommendations!</p>
-                </center>
-            </div>
-
-            <div class="col-md-4">
-                <center>
-                    <img width="150px" src="img/search-online.png" class="hover-img" />
-                    <h4 class="hover-title">Search Books</h4>
-                    <p class="text-justify hover-text">The Search Books feature allows users to quickly find books by title, author, or keywords, 
-                        providing filtered results for easy browsing. This enhances the library experience by saving time and helping 
-                        users locate resources efficiently.</p>
-                </center>
-            </div>
-
-            <div class="col-md-4">
-                <center>
-                    <img width="150px" src="img/library.png" class="hover-img" />
-                    <h4 class="hover-title">Visit Us</h4>
-                    <p class="text-justify hover-text">Drop by our library to explore our collection and services in person.
-                        Our team is here to assist you with any inquiries and help you find the resources you need!</p>
-                </center>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-</asp:Content>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+    </asp:Content>
