@@ -57,6 +57,11 @@ namespace LibraryWeb1
                 }
             }
         }
+        protected void ClearForm()
+        {
+            npt.Text = "";  // Clears the new password textbox
+            cpt.Text = "";  // Clears the confirm password textbox
+        }
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
@@ -78,11 +83,13 @@ namespace LibraryWeb1
 
 
                     Response.Write("<script>alert('Password Successfully Changed'); </script>");
+                    ClearForm();
                 }
             }
             else
             {
                 Response.Write("<script>alert('All fields are mandatory and passwords must match');</script>");
+                ClearForm();
             }
         }
     }

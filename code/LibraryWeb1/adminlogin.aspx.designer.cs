@@ -24,6 +24,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox MemberTextBox1;
 
         /// <summary>
+        /// rfvAdminID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAdminID;
+
+        /// <summary>
         /// PasswordTextBox2 control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PasswordTextBox2;
+
+        /// <summary>
+        /// rfvPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword;
 
         /// <summary>
         /// Button2 control.

@@ -56,20 +56,24 @@ namespace LibraryWeb1
                         if (SendResetEmail(email, fullName, myGUID))
                         {
                             Response.Write("<script>alert('Check your email to reset your password.');</script>");
+                            ClearForm();
                         }
                         else
                         {
                             Response.Write("<script>alert('Failed to send email. Please try again later.');</script>");
+                            ClearForm();
                         }
                     }
                     else
                     {
                         Response.Write("<script>alert('Email address not found.');</script>");
+                        ClearForm();
                     }
                 }
                 catch (Exception ex)
                 {
                     Response.Write("<script>alert('Database error: " + ex.Message + "');</script>");
+                    ClearForm();
                 }
             }
         }
@@ -139,6 +143,10 @@ namespace LibraryWeb1
             }
         }
 
+        protected void ClearForm()
+        {
+            txtEmail.Text = ""; // Clears the email input field
+        }
 
         private bool IsValidEmail(string email)
         {

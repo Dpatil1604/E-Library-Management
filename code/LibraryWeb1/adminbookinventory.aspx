@@ -2,67 +2,190 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script type="text/javascript">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <style>
 
 
-
-        //search andalll buttons
-        $(document).ready(function () {
-            // Fix for GridView headers
-            var table = $('#<%= GridView1.ClientID %>');
-
-                // Ensure GridView has a proper <thead> and <tbody> structure
-                table.find('thead').remove(); // Remove any existing <thead>
-                table.prepend($('<thead></thead>').append(table.find('tr:first'))); // Wrap the first row as <thead>
-
-                // Initialize DataTables with Bootstrap 5 styling
-                table.DataTable({
-                    paging: true,          // Enable pagination
-                    searching: true,       // Enable search
-                    info: true,            // Enable entry info
-                    lengthChange: true,    // Enable "Show entries"
-                    autoWidth: false,      // Disable auto width for better alignment
-                    responsive: true,      // Make table responsive
-                    dom: '<"row"<"col-md-6"l><"col-md-6"f>>' + // Layout for length and search
-                        '<"row"<"col-12"tr>>' +               // Layout for table
-                        '<"row"<"col-md-5"i><"col-md-7 text-end"p>>',  // Align pagination to the right
-                    language: {
-                        lengthMenu: "Show _MENU_ entries",
-                        search: "Search:",
-                        info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                        paginate: {
-                            previous: "Previous", // Replace with "Previous"
-                            next: "Next"          // Replace with "Next"
-                        }
-                    }
-                });
-            });
-
-        //file upload 
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-
-                reader.onload = function (e) {
-                    $('#imgview').attr('src', e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-
-            }
+        .home-link {
+            color: #40C4FF;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 5px;
+            margin-right: 15px;
         }
 
 
+        
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+    .container-fluid {
+        padding: 0px;
+    }
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        margin-bottom: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .btn-lg {
+        font-size: 16px;
+        padding: 12px;
+    }
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+    .btn-lg:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .form-control {
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    }
+    
+    .home-link:hover {
+        text-decoration: underline;
+    }
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+    .imgview-container {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .imgview-container img {
+        width: 100px;
+        border-radius: 5px;
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: #fff;
+        //text-align: center;
+    }
+    
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .card {
+    border-radius: 0; /* Removes rounded corners */
+}
+
+</style>
 
 
 
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+     <script type="text/javascript">
+         $(document).ready(function () {
+             var table = $('#<%= GridView1.ClientID %>');
+
+           // Ensure GridView has a proper <thead> and <tbody> structure
+           table.find('thead').remove();
+           table.prepend($('<thead></thead>').append(table.find('tr:first')));
+
+           // Initialize DataTables with custom layout
+           table.DataTable({
+               paging: true,
+               searching: true,
+               info: true,
+               lengthChange: true,
+               autoWidth: false,
+               responsive: true,
+               dom: '<"row mb-4"<"col-md-6"l><"col-md-6 text-end"f>>' +  // Move Search to rightmost
+                   '<"row"<"col-12"tr>>' +
+                   '<"row mt-4"<"col-md-6"i><"col-md-6 text-end"p>>',  // Move pagination to bottom right
+               language: {
+                   lengthMenu: "Show _MENU_ entries",
+                   search: "Search:",
+                   info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                   paginate: {
+                       previous: "Previous",
+                       next: "Next"
+                   }
+               }
+           });
+
+       });
+
+
+    
+
+          //file upload
+          function readURL(input) {
+              if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+
+
+                  reader.onload = function (e) {
+                      $('#imgview').attr('src', e.target.result);
+                  };
+
+                  reader.readAsDataURL(input.files[0]);
+
+              }
+          }
+
+
+
+
+
+      </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="container-fluid">
+        <br />
         <div class="row">
             <div class="col-md-5 ">
                 <div class="card">
@@ -71,7 +194,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <h4>Book Details</h4>
+                                    <h4 class="text-primary font-weight-bold">Book Details</h4>
                                 </center>
                             </div>
                         </div>
@@ -81,7 +204,7 @@
                                 <center>
                                     <img id="imgview" width="100px" src="book_inventory/book.png" />
                                 </center>
-                                
+                               
                             </div>
                         </div>
 
@@ -280,11 +403,10 @@
 
                             </div>
                         </div>
-
+                    <a href="homepage.aspx" class="home-link"> Back to Home</a><br />
+                    
                     </div>
-                    <br />
-                    <a href="homepage.aspx"><< Back to Home</a><br />
-                    <br />
+                    
                 </div>
 
                 <div class="col-md-7">
@@ -294,7 +416,7 @@
                             <div class="row">
                                 <div class="col">
                                     <center>
-                                        <h4>Book Inventory List </h4>
+                                        <h4 class="text-primary font-weight-bold">Book Inventory List </h4>
                                     </center>
                                 </div>
                             </div>
@@ -306,9 +428,9 @@
 
                           <div class="row">
     <div class="col">
-        <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server" AutoGenerateColumns="False" Font-Bold="False">
+        <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server"  Width="100%" AutoGenerateColumns="False" Font-Bold="False">
             <Columns>
-                <asp:BoundField DataField="book_id" HeaderText="ID"   > 
+                <asp:BoundField DataField="book_id" HeaderText="ID"   >
                 <ItemStyle Font-Bold="True" />
                 </asp:BoundField>
                 <%-- You can add more columns here if needed later --%>
@@ -378,7 +500,7 @@
                                       </div>
 
                                   </div>
-                                
+                               
                                 <div class="col-lg-2">
                                      <asp:Image CssClass="img-fluid " ID="Image1" runat="server" ImageUrl='<%# Eval("book_img_link") %>' />
                                  </div>

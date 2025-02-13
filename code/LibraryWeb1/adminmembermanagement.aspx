@@ -1,45 +1,50 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminmembermanagement.aspx.cs" Inherits="LibraryWeb1.adminmembermanagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
-      <script type="text/javascript">
-            $(document).ready(function () {
-                // Fix for GridView headers
-                var table = $('#<%= GridView1.ClientID %>');
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#<%= GridView1.ClientID %>');
 
-        // Ensure GridView has a proper <thead> and <tbody> structure
-        table.find('thead').remove(); // Remove any existing <thead>
-        table.prepend($('<thead></thead>').append(table.find('tr:first'))); // Wrap the first row as <thead>
+           // Ensure GridView has a proper <thead> and <tbody> structure
+           table.find('thead').remove();
+           table.prepend($('<thead></thead>').append(table.find('tr:first')));
 
-        // Initialize DataTables with Bootstrap 5 styling
-        table.DataTable({
-            paging: true,          // Enable pagination
-            searching: true,       // Enable search
-            info: true,            // Enable entry info
-            lengthChange: true,    // Enable "Show entries"
-            autoWidth: false,      // Disable auto width for better alignment
-            responsive: true,      // Make table responsive
-            dom: '<"row"<"col-md-6"l><"col-md-6"f>>' + // Layout for length and search
-                '<"row"<"col-12"tr>>' +               // Layout for table
-                '<"row"<"col-md-5"i><"col-md-7 text-end"p>>',  // Align pagination to the right
-            language: {
-                lengthMenu: "Show _MENU_ entries",
-                search: "Search:",
-                info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                paginate: {
-                    previous: "Previous", // Replace with "Previous"
-                    next: "Next"          // Replace with "Next"
-                }
-            }
-        });
-    });
-      </script>
+           // Initialize DataTables with custom layout
+           table.DataTable({
+               paging: true,
+               searching: true,
+               info: true,
+               lengthChange: true,
+               autoWidth: false,
+               responsive: true,
+               dom: '<"row mb-4"<"col-md-6"l><"col-md-6 text-end"f>>' +  // Move Search to rightmost
+                   '<"row"<"col-12"tr>>' +
+                   '<"row mt-4"<"col-md-6"i><"col-md-6 text-end"p>>',  // Move pagination to bottom right
+               language: {
+                   lengthMenu: "Show _MENU_ entries",
+                   search: "Search:",
+                   info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                   paginate: {
+                       previous: "Previous",
+                       next: "Next"
+                   }
+               }
+           });
 
+       });
+
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
     <div class="container-fluid">
+        <br />
         <div class="row">
             <div class="col-md-5 ">
                 <div class="card">
@@ -48,7 +53,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <h4>Member Details</h4> 
+                                    <h4 class="text-primary font-weight-bold">Member Details</h4> 
                                 </center>
                             </div>
                         </div>
@@ -170,10 +175,9 @@
                             
                        </div>
                 </div>
-               
+               <a href="homepage.aspx" class="home-link"> Back to Home</a>
             </div>
-                <br />
-                 <a href="homepage.aspx"><< Back to Home</a><br /><br />
+                
 </div>
 
         <div class="col-md-7">
@@ -183,7 +187,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <h4>Member List</h4>   
+                                    <h4 class="text-primary font-weight-bold">Member List</h4>   
                                 </center>
                             </div>
                         </div>
@@ -195,7 +199,7 @@
 
                          <div class="row">
                             <div class="col">
-                                
+                                <div class="table-responsive"> 
                                 <asp:GridView CssClass="table table-striped table-bordered" ID="GridView1" runat="server" AutoGenerateColumns="false">
                                     <Columns>
                                         <asp:BoundField DataField="member_id" HeaderText="Member ID" />
@@ -209,7 +213,7 @@
                                    </Columns>
                                  </asp:GridView>
 
-                               
+                               </div>
 
                             </div>
                         </div>
@@ -227,7 +231,48 @@
 
 
 
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .card {
+            border-radius: 0px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .btn-lg {
+    font-size: 16px;
+    padding: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
+.btn-lg:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .home-link {
+            color: #40C4FF;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 5px;
+            margin-right: 15px;
+        }
+    </style>
 
 
 

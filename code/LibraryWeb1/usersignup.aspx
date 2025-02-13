@@ -207,9 +207,9 @@
         </div>
     </div>-->
 
-<div style="display: flex; justify-content: center; align-items: center; min-height: 90vh; background-image: url('img2/S1.jpg'); background-size: cover; background-position: center; font-family: Arial, sans-serif;">
-    <div class="container" style="width: 55%; max-width: 700px; background-color: #DFF6FF; border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); padding: 30px; margin: 20px; color: #333333;">
-        
+<div class="bg-container">
+    <br />
+    <div class="container ">
         <!-- User Icon -->
         <div class="text-center mb-3">
             <img width="100px" src="img2/user.png" alt="User Icon" />
@@ -217,45 +217,70 @@
 
         <!-- Title -->
         <div class="text-center">
-            <h3 style="color: #1B3A57;">User Registration</h3>
-            <hr style="border-color: #1B3A57;" />
+            <h3 style="color: #FFFFFF;">User Registration</h3>
+            <hr style="border-color: #FFFFFF;" />
         </div>
+         <!-- Validation Summary -->
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="alert alert-danger" ShowSummary="true" />
+
 
         <!-- Form Fields -->
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label style="color: #1B3A57;">Full Name</label>
+                <label style="color:#FFFFFF;">Full Name</label>
                 <div class="form-group">
-                    <asp:TextBox cssClass="form-control" ID="FullNameTextBox" runat="server" placeholder="Full Name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;"></asp:TextBox>
+                   
+                    
+                    
+                 <asp:TextBox cssClass="form-control" ID="FullNameTextBox" runat="server" placeholder="Full Name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="FullNameValidator" runat="server" ControlToValidate="FullNameTextBox"
+    ErrorMessage="Full Name is required." ForeColor="#FF5733"  Font-Bold="true"  Display="Dynamic" />
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <label style="color: #1B3A57;">Date Of Birth</label>
+                <label style="color:#FFFFFF;">Date Of Birth</label>
                 <div class="form-group">
+                    
                     <asp:TextBox cssClass="form-control" ID="DateOfBirthTextBox" runat="server" placeholder="Date Of Birth" TextMode="Date" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="DOBValidator" runat="server" ControlToValidate="DateOfBirthTextBox"
+    ErrorMessage="Date of Birth is required." ForeColor="#FF5733"  Font-Bold="true"  Display="Dynamic" />
+
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label style="color: #1B3A57;">Contact No</label>
+                <label style="color:#FFFFFF;">Contact No</label>
                 <div class="form-group">
                     <asp:TextBox cssClass="form-control" ID="ContactTextBox" runat="server" placeholder="Contact No" TextMode="Number" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;"></asp:TextBox>
-                </div>
+               <asp:RequiredFieldValidator ID="ContactValidator" runat="server" ControlToValidate="ContactTextBox"
+    ErrorMessage="Contact No is required." ForeColor="#FF5733"  Font-Bold="true" Display="Dynamic" />
+                    <asp:RegularExpressionValidator ID="ContactNumberValidator" runat="server" ControlToValidate="ContactTextBox"
+    ErrorMessage="Enter a valid 10-digit number." ForeColor="#FF5733"  Font-Bold="true"  Display="Dynamic"
+    ValidationExpression="^\d{10}$" />
+                    </div>
             </div>
             <div class="col-md-6 mb-3">
-                <label style="color: #1B3A57;">Email-ID</label>
+                <label style="color: #FFFFFF;">Email-ID</label>
                 <div class="form-group">
                     <asp:TextBox cssClass="form-control" ID="EmailTextBox" runat="server" placeholder="Email-ID" TextMode="Email" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;"></asp:TextBox>
-                </div>
+               <!-- Required Field Validator -->
+        <asp:RequiredFieldValidator ID="EmailValidator" runat="server" ControlToValidate="EmailTextBox"
+            ErrorMessage="Email-ID is required." ForeColor="#FF5733"  Font-Bold="true" Display="Dynamic" />
+
+        <!-- Regular Expression Validator -->
+        <asp:RegularExpressionValidator ID="EmailFormatValidator" runat="server" ControlToValidate="EmailTextBox"
+            ErrorMessage="Enter a valid email address." ForeColor="#FF5733"  Font-Bold="true"  Display="Dynamic"
+            ValidationExpression="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+                    </div>
             </div>
         </div>
 
         <!-- Address Details -->
         <div class="row">
             <div class="col-md-4 mb-3">
-                <label style="color: #1B3A57;">State</label>
+                <label style="color: #FFFFFF;">State</label>
                 <div class="form-group">
                     <asp:DropDownList class="form-control" ID="StateDropDownList" runat="server" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;">
                         <asp:ListItem Text="Select" Value="select" />
@@ -296,26 +321,38 @@
     <asp:ListItem Text="Ladakh" Value="Ladakh" />
     <asp:ListItem Text="Jammu and Kashmir" Value="Jammu and Kashmir" />
                     </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="StateValidator" runat="server" ControlToValidate="StateDropDownList"
+    InitialValue="select" ErrorMessage="Please select a State." ForeColor="#FF5733"  Font-Bold="true" Display="Dynamic" />
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <label style="color: #1B3A57;">City</label>
+                <label style="color: #FFFFFF;">City</label>
                 <div class="form-group">
+                    
                     <asp:TextBox class="form-control" ID="CityTextBox" runat="server" placeholder="City" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="CityValidator" runat="server" ControlToValidate="CityTextBox"
+    ErrorMessage="City is required." ForeColor="#FF5733"  Font-Bold="true"  Display="Dynamic" />
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <label style="color: #1B3A57;">Pincode</label>
+                <label style="color: #FFFFFF;">Pincode</label>
                 <div class="form-group">
                     <asp:TextBox cssClass="form-control" ID="PincodeTextBox" runat="server" placeholder="Pincode" TextMode="Number" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="PincodeValidator" runat="server" ControlToValidate="PincodeTextBox"
+    ErrorMessage="Pincode is required." ForeColor="#FF5733"  Font-Bold="true"   Display="Dynamic" />
+<asp:RegularExpressionValidator ID="PincodeFormatValidator" runat="server" ControlToValidate="PincodeTextBox" ForeColor="#FF5733"  Font-Bold="true" 
+    ErrorMessage="Enter a valid 6-digit pincode." Display="Dynamic"
+    ValidationExpression="^\d{6}$" />
                 </div>
             </div>
         </div>
 
         <div class="mb-3">
-            <label style="color: #1B3A57;">Full Address</label>
+            <label style="color: #FFFFFF;">Full Address</label>
             <div class="form-group">
                 <asp:TextBox cssClass="form-control" ID="AddressTextBox" runat="server" placeholder="Full Address" TextMode="MultiLine" Rows="2" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="AddressValidator" runat="server" ControlToValidate="AddressTextBox" ForeColor="#FF5733"  Font-Bold="true" 
+    ErrorMessage="Full Address is required."  Display="Dynamic" />
             </div>
         </div>
 
@@ -326,15 +363,21 @@
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label style="color: #1B3A57;">User ID</label>
+                <label style="color: #FFFFFF;">User ID</label>
                 <div class="form-group">
                     <asp:TextBox class="form-control" ID="UserIDTextBox" runat="server" placeholder="User ID" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="UserIDValidator" runat="server"  ForeColor="#FF5733"  Font-Bold="true"  ControlToValidate="UserIDTextBox"     ErrorMessage="User ID is required."  Display="Dynamic" />
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <label style="color: #1B3A57;">Password</label>
+                <label style="color: #FFFFFF;">Password</label>
                 <div class="form-group">
                     <asp:TextBox class="form-control" ID="PasswordTextBox" runat="server" placeholder="Password" TextMode="Password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="PasswordValidator" runat="server" ControlToValidate="PasswordTextBox"
+    ErrorMessage="Password is required." ForeColor="#FF5733"  Font-Bold="true" Display="Dynamic"  />
+<asp:RegularExpressionValidator ID="PasswordLengthValidator" runat="server" ControlToValidate="PasswordTextBox"
+    ErrorMessage="Password must be at least 6 characters long." ForeColor="red" Display="Dynamic"
+    ValidationExpression="^.{6,}$" />
                 </div>
             </div>
         </div>
@@ -347,21 +390,153 @@
 
         <!-- Back Link -->
         <div class="text-center mt-4">
-            <a href="homepage.aspx" class="text-muted" style="color: #505050; text-decoration: none; font-weight: bold;">&laquo; Back to Home</a>
+                <a href="homepage.aspx" class="home-link" style=" text-decoration: none; font-weight: bold; display: block; text-align: right; margin-top: 10px;">Back to Home</a>
         </div>
     </div>
+    <br />
+
 </div>
 
-<style>
-    /* Hover effect for buttons */
-    .btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+
+
+    
+       <style>
+
+
+
+
+   /* Importing a modern font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+
+/* General Button Styling */
+/* Updated Button Styling */
+.btn {
+    background: linear-gradient(135deg, #ff6600, #cc4400); /* Orange Gradient */
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+}
+
+/* Button Hover Effect */
+.btn:hover {
+    background: linear-gradient(135deg, #cc4400, #aa3300); /* Darker Orange */
+    transform: scale(1.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
+ /* Forgot Password & Back to Home Links */
+ a.home-link {
+    color: #40C4FF; /* Light Blue */
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+ a.home-link:hover {
+    color: #FFC107; /* Soft Yellow */
+    text-decoration: underline;
+}
+
+
+    /* Attractive hover effect */
+    .form-group a {
+        text-decoration: none;
     }
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
+
+
+/* Updated TextBox Styling */
+.form-control {
+    font-size: 1rem;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Focus Effect for Inputs */
+.form-control:focus {
+    border-color: #005792;
+    box-shadow: 0 0 10px rgba(0, 87, 146, 0.3);
+}
+
+/* Labels Styling */
+label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+/* Title Styling */
+h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+.container {
+    width: 50%;
+    max-width: 700px;
+    background: rgba(74, 123, 168, 0.7); /* Blue with transparency */
+    border-radius: 0px; /* Slightly rounded corners */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); /* Increased shadow for a 3D effect */
+    padding: 30px;
+    margin: 20px auto;
+    color: #ffffff;
+    backdrop-filter: blur(8px); /* Adds a glassmorphic effect */
+}
+
+
+
+    .bg-container {
+    position: relative;
+    min-height: 90vh;
+    background-image: url('img2/S1.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+}
+
+.bg-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5); /* Adds a dark overlay */
+}
+
+.container {
+    position: relative;
+    z-index: 2; /* Ensures content appears above the overlay */
+}
+
 </style>
 
 

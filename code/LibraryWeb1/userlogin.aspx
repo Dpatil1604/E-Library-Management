@@ -173,10 +173,13 @@
                 <label for="memberId" style="display: block; margin-bottom: 5px; color:#e0e0e0;">Member ID</label>
                 <div class="form-group">
                     <asp:TextBox cssClass="form-control" ID="MemberTextBox1" runat="server" placeholder="Member ID" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.6); color: black;" />
+                 <asp:RequiredFieldValidator ID="rfvMemberId" runat="server" ControlToValidate="MemberTextBox1" ErrorMessage="Member ID is required" ForeColor="#FFC107"  Font-Bold="true" Display="Dynamic" />
                 </div>
                 <label for="password" style="display: block; margin-bottom: 5px; color: #e0e0e0;">Password</label>
                 <div class="form-group">
                     <asp:TextBox cssClass="form-control" ID="PasswordTextBox2" runat="server" placeholder="Password" TextMode="Password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.6); color: black;" />
+               
+                 <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="PasswordTextBox2" ErrorMessage="Password is required" ForeColor="#FFC107"  Font-Bold="true" Display="Dynamic" />    
                 </div>
                 <div class="form-group">
                     <asp:Button class="btn btn-primary btn-block btn-lg" ID="MemberLoginButton" runat="server" Text="Login" style="background-color: #007bff; color: white; border: none; padding: 12px 20px; border-radius: 0px; font-size: 18px; width: 100%;" OnClick="MemberLoginButton_Click" />

@@ -1,47 +1,46 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="userprofile.aspx.cs" Inherits="LibraryWeb1.userprofile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+   <script type="text/javascript">
+       $(document).ready(function () {
+           var table = $('#<%= GridView1.ClientID %>');
 
-     <script type="text/javascript">
+          // Ensure GridView has a proper <thead> and <tbody> structure
+          table.find('thead').remove();
+          table.prepend($('<thead></thead>').append(table.find('tr:first')));
+
+          // Initialize DataTables with custom layout
+          table.DataTable({
+              paging: true,
+              searching: true,
+              info: true,
+              lengthChange: true,
+              autoWidth: false,
+              responsive: true,
+              dom: '<"row mb-4"<"col-md-6"l><"col-md-6 text-end"f>>' +  // Move Search to rightmost
+                  '<"row"<"col-12"tr>>' +
+                  '<"row mt-4"<"col-md-6"i><"col-md-6 text-end"p>>',  // Move pagination to bottom right
+              language: {
+                  lengthMenu: "Show _MENU_ entries",
+                  search: "Search:",
+                  info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                  paginate: {
+                      previous: "Previous",
+                      next: "Next"
+                  }
+              }
+          });
+         
+      });
 
 
+   </script>
 
-        //search andalll buttons
-        $(document).ready(function () {
-            // Fix for GridView headers
-            var table = $('#<%= GridView1.ClientID %>');
-
-            // Ensure GridView has a proper <thead> and <tbody> structure
-            table.find('thead').remove(); // Remove any existing <thead>
-            table.prepend($('<thead></thead>').append(table.find('tr:first'))); // Wrap the first row as <thead>
-
-            // Initialize DataTables with Bootstrap 5 styling
-            table.DataTable({
-                paging: true,          // Enable pagination
-                searching: true,       // Enable search
-                info: true,            // Enable entry info
-                lengthChange: true,    // Enable "Show entries"
-                autoWidth: false,      // Disable auto width for better alignment
-                responsive: true,      // Make table responsive
-                dom: '<"row"<"col-md-6"l><"col-md-6"f>>' + // Layout for length and search
-                    '<"row"<"col-12"tr>>' +               // Layout for table
-                    '<"row"<"col-md-5"i><"col-md-7 text-end"p>>',  // Align pagination to the right
-                language: {
-                    lengthMenu: "Show _MENU_ entries",
-                    search: "Search:",
-                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                    paginate: {
-                        previous: "Previous", // Replace with "Previous"
-                        next: "Next"          // Replace with "Next"
-                    }
-                }
-            });
-        });
-     </script>
-
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-     <div class="container-fluid">
+  <div class="container-fluid">
         <div class="row">
             <div class="col-md-5 ">
 
@@ -204,11 +203,12 @@
                          <div class="row">
                              <div class="col text-center">
                                  <span class="badge badge-pill badge-info">Login Credentials</span>
+                                
 
                              </div>
 
                          </div>
-
+                         <br />
                         <div class="row">
                             <div class="col-md-4">
                                     
@@ -253,9 +253,11 @@
                         </div>
 
                     </div>
+                     <a href="homepage.aspx" class="home-link"> Back to Home</a>
                 </div>
 
-                <a href="homepage.aspx"><< Back to Home</a><br /><br />
+               
+                <br />
             </div>
 
 
@@ -287,16 +289,21 @@
                         <div class="row">
                             <div class="col">
                                     <hr /> 
+                                <br />
                             </div>
                         </div>
 
-                         <div class="row">
+                         <div class="row" >
                             <div class="col">
-                                <asp:GridView class="table table-striped table-bordered" ID ="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound"></asp:GridView>
+                                <div class="table-responsive"> 
+                                <asp:GridView class="table table-striped table-bordered" ID ="GridView1" runat="server"    OnRowDataBound="GridView1_RowDataBound"></asp:GridView>
+                                     <br />
+                                    </div>
                             </div>
+                                
                         </div>
 
-
+                        
                     </div>
                 </div>
 
@@ -304,17 +311,31 @@
     </div>
     </div>
 
-
-
-
-
-
-
-
-
-
     <!-- External Styles -->
 <style>
+
+
+   
+
+
+
+     /* Forgot Password & Back to Home Links */
+ a.home-link {
+    color: #40C4FF; /* Light Blue */
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+ a.home-link:hover {
+    color: #FFC107; /* Soft Yellow */
+    text-decoration: underline;
+}
+
 
     select.form-control {
     width: 100%;
@@ -328,28 +349,38 @@
       border-color:  #d2b48c;
    }
     .card {
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff; /* White background */
-        transition: transform 0.2s;
-    }
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    background-color: #FFF5EE; /* White background */
+    transition: transform 0.2s, box-shadow 0.3s;
+    color: #333333;
+     padding: 20px;
+}
 
-    .card:hover {
-        transform: scale(1.01); /* Slight hover zoom effect */
-    }
+.card:hover {
+    transform: scale(1.03); /* Slight hover zoom effect */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35); /* Even stronger shadow on hover */
+}
+
+
 
     .card-body {
         padding: 20px;
-        background-color: #f5f5dc; /* Light Green */
+        background-color:  #FFF5EE; /* Light Green */
 
     }
 
-    .badge {
-        font-size: 14px;
-        background-color:#8B4513;
-            color:#ffffff ;
-    }
+   .badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 12px;
+    color: #FFFFFF;  /* White text */
+    background-color: #FF8C00; /* Dark Orange */
+}
+
 
     .form-group {
         margin-bottom: 15px;
@@ -360,7 +391,7 @@
         font-size: 14px;
         margin-bottom: 5px;
         display: inline-block;
-        color: #333333; /* Dark text */
+        color: #2C3E50; /* Dark text */
     }
 
     .form-control {
@@ -376,21 +407,24 @@
         border-color: #007bff;
     }
 
-   
     .btn-primary {
-  background: linear-gradient(90deg, #6c5ce7, #fd79a8); /* Purple to pink gradient */
-  border: none;
-  color: #ffffff;
-  padding: 12px 30px;
-  font-size: 16px;
-  border-radius: 30px; /* Soft rounded buttons */
-  transition: background 0.3s;
-}
+        background-color: #007BFF; /* Solid Navy Blue */
+        border: none;
+        color: #ffffff;
+        padding: 12px 30px;
+        font-size: 16px;
+        border-radius: 4px; /* Box shape */
+        font-weight: bold;
+        transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 139, 0.6); /* Increased button shadow */
+        cursor: pointer;
+    }
 
-.btn-primary:hover {
-  background: linear-gradient(90deg, #fd79a8, #6c5ce7); /* Reverse gradient on hover */
-  transform: scale(1.05); /* Slight scale-up on hover */
-}
+    .btn-primary:hover {
+        background-color: #0056b3; /* Slightly darker blue for hover effect */
+        transform: scale(1.06);
+        box-shadow: 0 8px 20px rgba(0, 0, 139, 0.8); /* Even stronger shadow on hover */
+    }
 
 
 

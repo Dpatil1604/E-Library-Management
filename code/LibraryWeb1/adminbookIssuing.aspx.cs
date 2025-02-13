@@ -170,7 +170,7 @@ namespace LibraryWeb1
                     string query = @"
                 INSERT INTO book_issue
                 (member_id, member_name, book_id, book_name, issue_date, due_date)  
-                VALUES 
+                VALUES
                 (@member_id, @member_name, @book_id, @book_name, @issue_date, @due_date)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -197,7 +197,7 @@ namespace LibraryWeb1
                     con.Close();
                     Response.Write("<script>alert('Book Issued Successfully');</script>");
 
-                    
+
                     clearForm();
                 }
 

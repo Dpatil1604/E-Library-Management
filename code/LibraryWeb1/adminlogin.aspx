@@ -27,14 +27,21 @@
 
                 <div class="form-group">
                         <asp:TextBox cssClass="form-control" ID="MemberTextBox1" runat="server" placeholder="Admin ID" style="width: 100%; padding: 12px; border:1px solid #ccc; border-radius: 5px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.6); color: black"  />
-                    </div>
+                 <!-- Validation for Admin ID -->
+                    <asp:RequiredFieldValidator ID="rfvAdminID" runat="server" ControlToValidate="MemberTextBox1"
+                        ErrorMessage="Admin ID is required." ForeColor="#FFC107"  Font-Bold="true" Display="Dynamic" />    
+                </div>
                 
                 <label for="password" style="display: block; margin-bottom: 5px; color: #e0e0e0;">Password</label>
 
 
                 <div class="form-group">
                         <asp:TextBox cssClass="form-control" ID="PasswordTextBox2" runat="server" placeholder="Password" TextMode="Password" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; background: rgba(255, 255, 255, 0.5); color: black; " />
-                    </div>
+                   
+                <!-- Validation for Password -->
+                    <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="PasswordTextBox2"
+                        ErrorMessage="Password is required." ForeColor="#FFC107"  Font-Bold="true" Display="Dynamic" />    
+                </div>
 
 
 

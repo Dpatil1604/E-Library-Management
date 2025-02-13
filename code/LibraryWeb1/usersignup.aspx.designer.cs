@@ -114,6 +114,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+
+        /// <summary>
         /// FullNameTextBox control.
         /// </summary>
         /// <remarks>
@@ -121,6 +130,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FullNameTextBox;
+
+        /// <summary>
+        /// FullNameValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator FullNameValidator;
 
         /// <summary>
         /// DateOfBirthTextBox control.
@@ -132,6 +150,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox DateOfBirthTextBox;
 
         /// <summary>
+        /// DOBValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator DOBValidator;
+
+        /// <summary>
         /// ContactTextBox control.
         /// </summary>
         /// <remarks>
@@ -139,6 +166,24 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ContactTextBox;
+
+        /// <summary>
+        /// ContactValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ContactValidator;
+
+        /// <summary>
+        /// ContactNumberValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ContactNumberValidator;
 
         /// <summary>
         /// EmailTextBox control.
@@ -150,6 +195,24 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox EmailTextBox;
 
         /// <summary>
+        /// EmailValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmailValidator;
+
+        /// <summary>
+        /// EmailFormatValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailFormatValidator;
+
+        /// <summary>
         /// StateDropDownList control.
         /// </summary>
         /// <remarks>
@@ -157,6 +220,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList StateDropDownList;
+
+        /// <summary>
+        /// StateValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator StateValidator;
 
         /// <summary>
         /// CityTextBox control.
@@ -168,6 +240,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox CityTextBox;
 
         /// <summary>
+        /// CityValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CityValidator;
+
+        /// <summary>
         /// PincodeTextBox control.
         /// </summary>
         /// <remarks>
@@ -175,6 +256,24 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PincodeTextBox;
+
+        /// <summary>
+        /// PincodeValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PincodeValidator;
+
+        /// <summary>
+        /// PincodeFormatValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator PincodeFormatValidator;
 
         /// <summary>
         /// AddressTextBox control.
@@ -186,6 +285,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox AddressTextBox;
 
         /// <summary>
+        /// AddressValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator AddressValidator;
+
+        /// <summary>
         /// UserIDTextBox control.
         /// </summary>
         /// <remarks>
@@ -195,6 +303,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox UserIDTextBox;
 
         /// <summary>
+        /// UserIDValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator UserIDValidator;
+
+        /// <summary>
         /// PasswordTextBox control.
         /// </summary>
         /// <remarks>
@@ -202,6 +319,24 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PasswordTextBox;
+
+        /// <summary>
+        /// PasswordValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator PasswordValidator;
+
+        /// <summary>
+        /// PasswordLengthValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator PasswordLengthValidator;
 
         /// <summary>
         /// RegisterButton control.

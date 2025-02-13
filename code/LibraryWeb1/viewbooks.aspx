@@ -201,33 +201,48 @@ a:hover {
 </style>
 
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var table = $('#<%= GridView1.ClientID %>');
-            table.find('thead').remove();
-            table.prepend($('<thead></thead>').append(table.find('tr:first')));
-            table.DataTable({
-                paging: true,
-                searching: true,
-                info: true,
-                lengthChange: true,
-                autoWidth: false,
-                responsive: true,
-                dom: '<"row"<"col-md-6"l><"col-md-6"f>>' +
-                    '<"row"<"col-12"tr>>' +
-                    '<"row"<"col-md-5"i><"col-md-7 text-end"p>>',
-                language: {
-                    lengthMenu: "Show _MENU_ entries",
-                    search: "Search:",
-                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                    paginate: {
-                        previous: "Previous",
-                        next: "Next"
-                    }
+   <script type="text/javascript">
+       $(document).ready(function () {
+           var table = $('#<%= GridView1.ClientID %>');
+
+        // Ensure GridView has a proper <thead> and <tbody> structure
+        table.find('thead').remove();
+        table.prepend($('<thead></thead>').append(table.find('tr:first')));
+
+        // Initialize DataTables with custom layout
+        table.DataTable({
+            paging: true,
+            searching: true,
+            info: true,
+            lengthChange: true,
+            autoWidth: false,
+            responsive: true,
+            dom: '<"top-section d-flex justify-content-between mb-3"<"entries-length"l><"search-box"f>>' +
+                '<"table-container"tr>' +
+                '<"bottom-section d-flex justify-content-between mt-3"<"info-section"i><"pagination-box"p>>',
+            language: {
+                lengthMenu: "Show _MENU_ entries",
+                search: "Search:",
+                info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                paginate: {
+                    previous: "Previous",
+                    next: "Next"
                 }
-            });
+            }
         });
-    </script>
+
+        // Move search box to the top right (Green Line Position)
+        $(".search-box").css({
+            "position": "absolute",
+            "top": "10px", // Adjust based on your layout
+            "right": "20px" // Adjust based on your layout
+        });
+    });
+
+
+
+   </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">

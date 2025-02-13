@@ -26,6 +26,9 @@ namespace LibraryWeb1
             else
             {
                 SignUpNewUser();
+                ClearForm(); // Clear the form after successful signup
+                             // Redirect to login page
+                Response.Redirect("userlogin.aspx");
             }
         }
 
@@ -120,6 +123,23 @@ namespace LibraryWeb1
                     // ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
                 }
             }
+        }
+
+        // Method to clear all input fields in the form
+        private void ClearForm()
+        {
+            FullNameTextBox.Text = "";
+            DateOfBirthTextBox.Text = "";
+            ContactTextBox.Text = "";
+            EmailTextBox.Text = "";
+            CityTextBox.Text = "";
+            PincodeTextBox.Text = "";
+            AddressTextBox.Text = "";
+            UserIDTextBox.Text = "";
+            PasswordTextBox.Text = "";
+
+            // Reset the dropdown list to the default value (assuming the first item is the default)
+            StateDropDownList.SelectedIndex = 0;
         }
 
         // Validate user input
