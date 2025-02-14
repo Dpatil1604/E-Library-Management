@@ -407,11 +407,35 @@
 
 
    /* Importing a modern font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Light.woff2') format('woff2'),
+         url('fonts/Poppins-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.woff2') format('woff2'),
+         url('fonts/Poppins-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-SemiBold.woff2') format('woff2'),
+         url('fonts/Poppins-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
 }
+
 
 
 

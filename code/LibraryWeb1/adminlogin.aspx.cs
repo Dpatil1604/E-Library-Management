@@ -45,8 +45,7 @@ namespace LibraryWeb1
 
                                 // Ensure session is saved before redirecting
                                 Session.Timeout = 30; // Session expires after 30 minutes
-                                Response.Redirect("homepage.aspx", false);
-                                Context.ApplicationInstance.CompleteRequest();
+                                Response.Redirect("homepage.aspx");
                             }
                             else
                             {

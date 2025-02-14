@@ -309,7 +309,7 @@ footer {
                     <div class="row">
                         <div class="col">
                             <center>
-                                <img width="100px" src="img2/user.png" class="img-fluid rounded-circle" />
+                                <img width="100px" src="img/icons8-author-51.png"  />
                             </center>
                         </div>
                     </div>
@@ -326,8 +326,10 @@ footer {
                             <div class="form-group">
                                 <div class="input-group">
                                     <asp:TextBox class="form-control" ID="TextBox3" runat="server" placeholder="Enter ID"></asp:TextBox>
-                                    <asp:Button class="btn btn-primary ml-2" ID="Button1" runat="server" Text="Go" OnClick="Button1_Click" />
+                                    <asp:Button class="btn btn-primary ml-2" ID="Button1" runat="server" Text="Go" OnClick="Button1_Click" CausesValidation="false"/>
                                 </div>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox3"
+                                    ErrorMessage="Author ID is required." CssClass="text-danger" Display="Dynamic" />
                             </div>
                         </div>
 
@@ -335,6 +337,8 @@ footer {
                             <label for="TextBox4">Author Name</label>
                             <div class="form-group">
                                 <asp:TextBox class="form-control" ID="TextBox4" runat="server" placeholder="Enter Author Name"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox4"
+                                    ErrorMessage="Author Name is required." CssClass="text-danger" Display="Dynamic" />
                             </div>
                         </div>
                     </div>
@@ -352,7 +356,7 @@ footer {
                     </div>
                 </div>
                  
-            <a href="homepage.aspx" class="home-link" > Back to Home</a><br /><br />
+            <a href="homepage.aspx" class="home-link" CausesValidation="false"> Back to Home</a><br /><br />
             </div>
             
         </div>

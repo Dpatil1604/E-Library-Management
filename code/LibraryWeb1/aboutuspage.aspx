@@ -148,7 +148,22 @@
 <style>
 
 
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+   /* Importing Poppins font locally */
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.woff2') format('woff2'),
+         url('fonts/Poppins-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Bold.woff2') format('woff2'),
+         url('fonts/Poppins-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
 
 * {
     margin: 0;
@@ -485,9 +500,9 @@ body {
 /* Enhanced Shadow Effect for Every Section Except .about-header and for .contact-section */
 section:not(.about-header),
 .contact-section {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    margin: 20px 0;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3); /* Increased shadow intensity */
+    border-radius: 12px; /* Slightly more rounded corners */
+    margin: 25px 0;
 }
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.UI;
 
@@ -10,6 +11,44 @@ namespace LibraryWeb1
         {
             try
             {
+
+                // Access control: Restrict unauthorized users from private pages
+                if (Session["username"] == null || string.IsNullOrEmpty(Session["username"]?.ToString()))
+                {
+                    string currentPage = Request.Url.AbsolutePath.ToLower();
+                    string[] allowedPages =
+{
+    "homepage.aspx",  // ✅ Added homepage to the allowed list
+    "aboutuspage.aspx",
+    "adminauthormanagement.aspx",
+    "adminbookinventory.aspx",
+    "adminbookissuing.aspx",
+    "adminlogin.aspx",
+    "adminmembermanagement.aspx",
+    "adminpublishermanagement.aspx",
+    "resetpsw.aspx",
+    "userlogin.aspx",
+    "userprofile.aspx",
+    "usersignup.aspx",
+    "viewbooks.aspx",
+    "forgotpsw.aspx",
+    "global.asaxmepage.aspx"
+};
+
+                    bool isPublicPage = allowedPages.Any(page => currentPage.Contains(page));
+
+                    if (!isPublicPage)
+                    {
+                        Response.Redirect("userlogin.aspx", false);
+                        Context.ApplicationInstance.CompleteRequest();
+                        return;
+                    }
+                }
+
+
+
+
+
                 // Debug: Check what role is stored in session
                 Response.Write("<script>console.log('Role: " + Session["role"] + "');</script>");
 

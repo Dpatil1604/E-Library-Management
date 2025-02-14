@@ -74,22 +74,30 @@
                 <div class="card shadow-lg border-0 rounded">
                     <div class="card-body">
                         <center><h4 class="text-primary font-weight-bold">Publisher Details</h4></center>
-                        <center><img width="100px" src="img2/user.png" class="img-fluid rounded-circle" /></center>
+                        <center><img width="100px" src="img/publisher.png"  /></center>
+        
                         <hr />
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Publisher ID</label>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox class="form-control" ID="TextBox3" runat="server" placeholder="Enter ID"></asp:TextBox>
-                                        <asp:Button class="btn btn-primary ml-2" ID="Button1" runat="server" Text="Go" OnClick="Button1_Click" />
+                                        <asp:TextBox class="form-control" ID="TextBox3" runat="server" placeholder="Enter ID" ></asp:TextBox>
+                                        <asp:Button class="btn btn-primary ml-2" ID="Button1" runat="server" Text="Go"  CausesValidation="false" OnClick="Button1_Click" />
                                     </div>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox3"
+                                    ErrorMessage="Publisher ID is required." CssClass="text-danger" Display="Dynamic" />
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <label>Publisher Name</label>
                                 <div class="form-group">
-                                    <asp:TextBox class="form-control" ID="TextBox4" runat="server" placeholder="Enter Publisher Name"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="TextBox4" runat="server" placeholder="Enter Publisher Name" ></asp:TextBox>
+                               
+                                    
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox4"
+                                    ErrorMessage="Publisher Name is required." CssClass="text-danger" Display="Dynamic" />
+
                                 </div>
                             </div>
                         </div>
@@ -105,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="homepage.aspx" class="home-link"> Back to Home</a><br /><br />
+                    <a href="homepage.aspx" class="home-link" CausesValidation="false"> Back to Home</a><br /><br />
                 </div>
             </div>
             <div class="col-md-7">

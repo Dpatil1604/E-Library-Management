@@ -28,7 +28,8 @@ namespace LibraryWeb1
                 SignUpNewUser();
                 ClearForm(); // Clear the form after successful signup
                              // Redirect to login page
-                Response.Redirect("userlogin.aspx");
+                Response.Redirect("userlogin.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
         }
 

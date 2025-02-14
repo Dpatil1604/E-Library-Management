@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="LibraryWeb1.Site1" %>
-
 <!DOCTYPE html>
 
 <html>
@@ -17,12 +16,18 @@
     
     <link href="css/customstylesheet.css" rel="stylesheet" />
 
-    <%--jquery--%>
-    <script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+    
+
+    
+    <!-- jQuery (Latest Full Version) -->
+
+    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+    
     <%--popper js--%>
     <script src="bootstrap/js/popper.min.js"></script>
     <%--bootstrap js--%>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+     <%-- jQuery (Full Version) Extra added --%>
+         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <%--Datatable js--%>
     <script src="datatables/js/dataTables.min.js"></script>
 
@@ -92,21 +97,26 @@
                     <img src="img/books.png" width="30" height="30"  />
                     E-Library
                 </a>
+                
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
 
-                <button class="navbar-toggler" type="button" data-toggler="collapse" 
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="homepage.aspx" CausesValidation="false" >Home</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="aboutuspage.aspx" CausesValidation="false" >About Us</a>
-                        </li>
-                    </ul>
+
+
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="homepage.aspx" CausesValidation="false">Home</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="aboutuspage.aspx" CausesValidation="false">About Us</a>
+        </li>
+    </ul>
+                   
                     <ul class="navbar-nav">
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" CausesValidation="false" >View Books</asp:LinkButton>
@@ -117,11 +127,11 @@
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton3" runat="server" OnClick="LinkButton3_Click" CausesValidation="false">Sign Up</asp:LinkButton>
                         </li>
-                        <li class="nav-item active">
-                            <asp:LinkButton class="nav-link" ID="LinkButton4" runat="server" Visible="False" OnClick="LinkButton4_Click">Logout</asp:LinkButton>
+                        <li class="nav-item active"> 
+                            <asp:LinkButton class="nav-link" ID="LinkButton4" runat="server" Visible="False" OnClick="LinkButton4_Click" CausesValidation="false" >Logout</asp:LinkButton>
                         </li>
                         <li class="nav-item active d-flex align-items-center">
-                            <asp:LinkButton class="nav-link" ID="LinkButton5" runat="server" Visible="False" OnClick="LinkButton5_Click">Hello user</asp:LinkButton>
+                            <asp:LinkButton class="nav-link" ID="LinkButton5" runat="server" Visible="False" OnClick="LinkButton5_Click" CausesValidation="false" >Hello user</asp:LinkButton>
                         </li>
                     </ul>
                 </div>
@@ -146,15 +156,15 @@
                 <p>
                     <asp:LinkButton class="footerlinks" ID="LinkButton6" runat="server" OnClick="LinkButton6_Click" CausesValidation="false">Admin Login</asp:LinkButton>
                     &nbsp;&nbsp;
-                    <asp:LinkButton class="footerlinks" ID="LinkButton7" runat="server" OnClick="LinkButton7_Click" Visible="False">Author Management</asp:LinkButton>
+                    <asp:LinkButton class="footerlinks" ID="LinkButton7" runat="server" OnClick="LinkButton7_Click" Visible="False" CausesValidation="false" >Author Management</asp:LinkButton>
                     &nbsp;&nbsp;
-                    <asp:LinkButton class="footerlinks" ID="LinkButton8" runat="server" OnClick="LinkButton8_Click" Visible="False">Publisher Management</asp:LinkButton>
+                    <asp:LinkButton class="footerlinks" ID="LinkButton8" runat="server" OnClick="LinkButton8_Click" Visible="False"  CausesValidation="false">Publisher Management</asp:LinkButton>
                     &nbsp;&nbsp;
-                    <asp:LinkButton class="footerlinks" ID="LinkButton9" runat="server" OnClick="LinkButton9_Click" Visible="False">Book Inventory</asp:LinkButton>
+                    <asp:LinkButton class="footerlinks" ID="LinkButton9" runat="server" OnClick="LinkButton9_Click" Visible="False" CausesValidation="false" >Book Inventory</asp:LinkButton>
                     &nbsp;&nbsp;
-                    <asp:LinkButton class="footerlinks" ID="LinkButton10" runat="server" OnClick="LinkButton10_Click" Visible="False">Book Issuing</asp:LinkButton>
+                    <asp:LinkButton class="footerlinks" ID="LinkButton10" runat="server" OnClick="LinkButton10_Click" Visible="False" CausesValidation="false" >Book Issuing</asp:LinkButton>
                     &nbsp;&nbsp;
-                    <asp:LinkButton class="footerlinks" ID="LinkButton11" runat="server" OnClick="LinkButton11_Click" Visible="False">Member Management</asp:LinkButton>
+                    <asp:LinkButton class="footerlinks" ID="LinkButton11" runat="server" OnClick="LinkButton11_Click" Visible="False" CausesValidation="false" >Member Management</asp:LinkButton>
                 </p>
             </div>
         </div>
@@ -171,7 +181,40 @@
 </footer>
 
     </form>
+
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    var navbarToggler = document.querySelector(".navbar-toggler");
+    var navbarCollapse = document.querySelector(".navbar-collapse");
+
+    if (navbarToggler && navbarCollapse) {
+        if (sessionStorage.getItem("navbarOpen") === "true") {
+            navbarCollapse.classList.add("show");
+        }
+
+        navbarToggler.addEventListener("click", function () {
+            navbarCollapse.classList.toggle("show");
+            sessionStorage.setItem("navbarOpen", navbarCollapse.classList.contains("show"));
+        });
+
+        document.querySelectorAll(".nav-link").forEach(function (link) {
+            link.addEventListener("click", function () {
+                sessionStorage.setItem("navbarOpen", "false");
+                navbarCollapse.classList.remove("show"); // Close navbar on click
+            });
+        });
+    }
+});
+
+
+</script>
+
+
+
 </body>
+
   
 
 

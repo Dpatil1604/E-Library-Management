@@ -60,27 +60,40 @@ namespace LibraryWeb1
         //issue button
         protected void Button2_Click(object sender, EventArgs e)
         {
-            // Validate book existence and member existence before checking issue entry
             if (checkIfBookExist() && checkIfMemberExist())
             {
-                // Check if the book has already been issued to the same member
-                if (checkIfIssueEntryExist())
+                // Get the user status from the database
+                string userStatus = getUserStatus(TextBox4.Text.Trim());
+
+                // Log the userStatus for debugging purposes
+                Response.Write($"<script>alert('User Status: {userStatus}');</script>");
+
+                // For comparison, convert to lower case to avoid case sensitivity issues
+                if (userStatus.ToLower() == "active")
                 {
-                    // Inform the user if the book has already been issued
-                    Response.Write("<script>alert('This Member Already has this book.');</script>");
+                    if (checkIfIssueEntryExist())
+                    {
+                        Response.Write("<script>alert('This Member Already has this book.');</script>");
+                    }
+                    else
+                    {
+                        issueBook();
+                    }
                 }
                 else
                 {
-                    // Issue the book to the member
-                    issueBook();
+                    // Provide more detailed feedback based on the user status
+                    Response.Write($"<script>alert('This Member is {userStatus}. Book cannot be issued.');</script>");
                 }
             }
             else
             {
-                // If the book or member does not exist
                 Response.Write("<script>alert('Wrong Book ID or Member ID');</script>");
             }
         }
+
+
+
 
         //delete button
         protected void Button3_Click(object sender, EventArgs e)
@@ -108,6 +121,54 @@ namespace LibraryWeb1
 
         }
         //user defined function
+
+
+
+        // This method is used to get the status of a member
+        private string getUserStatus(string memberId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    // Query to retrieve the account status from the member_master table
+                    MySqlCommand cmd = new MySqlCommand("SELECT account_status FROM elibrarydb.member_master WHERE member_id=@memberId", con);
+                    cmd.Parameters.AddWithValue("@memberId", memberId);
+
+                    object status = cmd.ExecuteScalar(); // Execute the query to get the status
+
+                    // Check if a valid status is returned
+                    if (status != null && !string.IsNullOrWhiteSpace(status.ToString()))
+                    {
+                        return status.ToString().Trim(); // Return the status (active, pending, etc.) without spaces
+                    }
+                    else
+                    {
+                        return "Unknown"; // If no status is found or status is empty, return "Unknown"
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error message (optionally you can use a logging framework here)
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                return "Error"; // If an exception occurs, return "Error"
+            }
+        }
+
+
+
+
+
+
+
+
+
 
 
         void returnBook()

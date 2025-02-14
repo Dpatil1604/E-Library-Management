@@ -22,10 +22,7 @@ namespace LibraryWeb1
         });
         }
 
-        protected void Session_Start(object sender, EventArgs e)
-        {
-
-        }
+       
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
@@ -42,10 +39,16 @@ namespace LibraryWeb1
 
         }
 
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("New session started: " + Session.SessionID);
+        }
+
         protected void Session_End(object sender, EventArgs e)
         {
-
+            System.Diagnostics.Debug.WriteLine("Session expired: " + Session.SessionID);
         }
+
 
         protected void Application_End(object sender, EventArgs e)
         {

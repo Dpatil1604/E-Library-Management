@@ -108,119 +108,54 @@
 
   
   <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 
     <style>
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.woff2') format('woff2'),
+         url('fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Bold.woff2') format('woff2'),
+         url('fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Banner */
+.header-banner {
+    background: linear-gradient(135deg, #002147, #004aad);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    font-weight: 600;
+}
+
 .header-banner h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.card-title {
-    font-size: 1.6rem;
-    font-weight: bold;
-    letter-spacing: 1px;
+.header-banner p {
+    font-size: 1.2rem;
+    opacity: 0.85;
 }
 
-
-
-
-
-
-
-
-        /* General Styles */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fc;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        
-
-        /* Header Banner */
-        .header-banner {
-            background: linear-gradient(135deg, #002147, #004aad);
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-            font-weight: 600;
-        }
-
-        .header-banner h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-        }
-
-        .header-banner p {
-            font-size: 1.2rem;
-            opacity: 0.85;
-        }
-
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #002147;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Container */
-        .container {
-            padding: 50px 10%;
-        }
-
-        /* Card Styles */
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-            color: #002147;
-        }
-
-       .card img {
-    max-width: 100px;       /* Adjust image size as needed */
-    margin: 0 auto;         /* Center the image horizontally */
-    display: block;         /* Make the image a block-level element */
-    margin-bottom: 15px;    /* Add space below the image */
-    transition: transform 0.3s ease, filter 0.3s ease; /* Optional: Smooth effects */
-}
-
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #002147, #004aad);
-            color: white;
-        }
-
-        .card:hover img {
-            transform: scale(1.1);
-            filter: brightness(1.2);
-        }
-
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 15px 0;
-        }
-
-        .card-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-
-
-        /* Section Header Styling */
+/* Section Headers */
 .section-header {
     text-align: center;
     margin-bottom: 40px;
@@ -232,7 +167,6 @@
     position: relative;
 }
 
-/* Styling for the subheading */
 .section-header p {
     font-size: 1.1rem;
     font-weight: 400;
@@ -253,79 +187,95 @@
     border-radius: 5px;
 }
 
-
-
-
-
-
-
-
-        /* Join Us Section */
-        .join-us {
-            background: #004aad;
-            color: white;
-            text-align: center;
-            padding: 50px;
-            margin: 50px 0;
-        }
-
-        .join-us h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .join-us p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .defaulter-list-img {
-    width: 100px; /* Increase width */
-    height: auto; /* Maintain aspect ratio */
-    display: block;
-    margin: 0 auto; /* Center the image */
+/* Container */
+.container {
+    padding: 50px 10%;
 }
 
-
-
-        .sign-up-img{
-    width: 100px; /* Increase width */
-    height: auto; /* Maintain aspect ratio */
-    display: block;
-    margin: 0 auto; /* Center the image */
+/* Card Styles */
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    color: #002147;
 }
 
-        .visit-us-img{
-    width: 100px; /* Increase width */
-    height: auto; /* Maintain aspect ratio */
+.card img {
+    max-width: 100px;
+    margin: 0 auto 15px;
     display: block;
-    margin: 0 auto; /* Center the image */
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-
-        .search-books-img{
-    width: 100px; /* Increase width */
-    height: auto; /* Maintain aspect ratio */
-    display: block;
-    margin: 0 auto; /* Center the image */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #002147, #004aad);
+    color: white;
 }
 
+.card:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 5%;
-            }
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 15px 0;
+}
 
-            .header-banner h1 {
-                font-size: 2.2rem;
-            }
+.card-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
 
-            .card {
-                padding: 20px;
-            }
-        }
+/* Join Us Section */
+.join-us {
+    background: #004aad;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    margin: 50px 0;
+}
+
+.join-us h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.join-us p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Unified Image Styling */
+.sign-up-img, .visit-us-img, .search-books-img, .defaulter-list-img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 5%;
+    }
+
+    .header-banner h1 {
+        font-size: 2.2rem;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+
     </style>
 
 
@@ -353,7 +303,7 @@
                 <div class="card">
                     <img src="img/search-online.png" alt="Search Books"class="img-fluid">
                     <h4 class="card-title">Search Books</h4>
-                    <p class="card-text">Discover books effortlessly by title, author, or keywords with filters for seamless browsing and convenience.</p>
+                    <p class="card-text">Discover books effortlessly by title, author, or keywords with **advanced** filters for seamless browsing and maximum convenience.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -384,7 +334,7 @@
                 <div class="card">
                     <img src="img1/sign%20up.png" alt="Sign Up" class="img-fluid sign-up-img">
                     <h4 class="card-title">Sign Up</h4>
-                    <p class="card-text">Create a personalized account to seamlessly access our library’s extensive collection, exclusive resources, and advanced features</p>
+                    <p class="card-text">Create a personalized account to seamlessly access our library’s extensive collection, exclusive resources, and features.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -398,7 +348,7 @@
                 <div class="card">
                     <img src="img/library.png" alt="Visit Us" class="img-fluid visit-us-img">
                     <h4 class="card-title">Visit Us</h4>
-                    <p class="card-text">Visit our library to discover our extensive literary collection and benefit from specialized expert assistance</p>
+                    <p class="card-text">Visit our library to discover our extensive literary collection and benefit from specialized and professional expert assistance.</p>
                 </div>
             </div>
         </div>
@@ -407,6 +357,6 @@
 
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-   
+    
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     </asp:Content>

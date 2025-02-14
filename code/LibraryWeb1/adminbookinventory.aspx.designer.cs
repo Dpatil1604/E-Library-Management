@@ -24,6 +24,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
+        /// rfvFileUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFileUpload;
+
+        /// <summary>
         /// TextBox3 control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.Button Button4;
 
         /// <summary>
+        /// rfvBookID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookID;
+
+        /// <summary>
         /// TextBox4 control.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox4;
+
+        /// <summary>
+        /// rfvBookName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookName;
 
         /// <summary>
         /// DropDownList1 control.
@@ -60,6 +87,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
 
         /// <summary>
+        /// rfvLanguage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLanguage;
+
+        /// <summary>
         /// DropDownList2 control.
         /// </summary>
         /// <remarks>
@@ -67,6 +103,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
         /// DropDownList3 control.
@@ -78,6 +123,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
 
         /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+
+        /// <summary>
         /// TextBox1 control.
         /// </summary>
         /// <remarks>
@@ -85,6 +139,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
+
+        /// <summary>
+        /// rfvDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDate;
 
         /// <summary>
         /// ListBox1 control.
@@ -96,6 +159,15 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.ListBox ListBox1;
 
         /// <summary>
+        /// rfvGenre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvGenre;
+
+        /// <summary>
         /// TextBox9 control.
         /// </summary>
         /// <remarks>
@@ -103,6 +175,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox9;
+
+        /// <summary>
+        /// rfvEdition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEdition;
 
         /// <summary>
         /// TextBox10 control.
@@ -114,6 +195,24 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox TextBox10;
 
         /// <summary>
+        /// rfvCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCost;
+
+        /// <summary>
+        /// rvBookCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvBookCost;
+
+        /// <summary>
         /// TextBox11 control.
         /// </summary>
         /// <remarks>
@@ -123,6 +222,24 @@ namespace LibraryWeb1
         protected global::System.Web.UI.WebControls.TextBox TextBox11;
 
         /// <summary>
+        /// rfvPages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPages;
+
+        /// <summary>
+        /// rvPages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvPages;
+
+        /// <summary>
         /// TextBox2 control.
         /// </summary>
         /// <remarks>
@@ -130,6 +247,24 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
+
+        /// <summary>
+        /// rfvActualStock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvActualStock;
+
+        /// <summary>
+        /// rvActualStock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvActualStock;
 
         /// <summary>
         /// TextBox6 control.
@@ -157,6 +292,15 @@ namespace LibraryWeb1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox5;
+
+        /// <summary>
+        /// rfvDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescription;
 
         /// <summary>
         /// Button1 control.

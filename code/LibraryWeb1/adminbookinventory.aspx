@@ -216,6 +216,8 @@
                         <div class="row">
                             <div class="col">
                                 <asp:FileUpload  onchange="readURL(this);" class="form-control" ID="FileUpload1" runat="server" />
+                                <asp:RequiredFieldValidator ID="rfvFileUpload" runat="server" ControlToValidate="FileUpload1"
+    ErrorMessage="Please upload a book image" ForeColor="Red" Display="Dynamic" />
                             </div>
                         </div>
 
@@ -227,12 +229,17 @@
                                         <asp:TextBox CssClass="form-control " ID="TextBox3" runat="server" placeholder="Book ID"></asp:TextBox>
                                         <asp:Button ID="Button4" runat="server" class="btn  btn-primary" Text="Go" OnClick="Button4_Click" />
                                     </div>
+                                    <asp:RequiredFieldValidator ID="rfvBookID" runat="server" ControlToValidate="TextBox3" 
+    ErrorMessage="Book ID is required" ForeColor="Red" Display="Dynamic" />
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <label>Book Name</label>
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="TextBox4" runat="server" placeholder="Book Name"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvBookName" runat="server" ControlToValidate="TextBox4" 
+    ErrorMessage="Book Name is required" ForeColor="Red" Display="Dynamic" />
+
                                 </div>
                             </div>
                         </div>
@@ -242,23 +249,55 @@
                                 <label>Language</label>
                                 <div class="form-group">
                                     <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
+                                        <asp:ListItem Text="Select Language" Value="" />
                                         <asp:ListItem Text="English" Value="English"></asp:ListItem>
-                                        <asp:ListItem Text="Hindi" Value="Hindi"></asp:ListItem>
-                                        <asp:ListItem Text="Marathi" Value="Marathi"></asp:ListItem>
-                                        <asp:ListItem Text="French" Value="French"></asp:ListItem>
-                                        <asp:ListItem Text="German" Value="German"></asp:ListItem>
-                                        <asp:ListItem Text="Urdu" Value="Urdu"></asp:ListItem>
-
+    <asp:ListItem Text="Hindi" Value="Hindi"></asp:ListItem>
+    <asp:ListItem Text="Marathi" Value="Marathi"></asp:ListItem>
+    <asp:ListItem Text="French" Value="French"></asp:ListItem>
+    <asp:ListItem Text="German" Value="German"></asp:ListItem>
+    <asp:ListItem Text="Urdu" Value="Urdu"></asp:ListItem>
+    <asp:ListItem Text="Spanish" Value="Spanish"></asp:ListItem>
+    <asp:ListItem Text="Italian" Value="Italian"></asp:ListItem>
+    <asp:ListItem Text="Portuguese" Value="Portuguese"></asp:ListItem>
+    <asp:ListItem Text="Russian" Value="Russian"></asp:ListItem>
+    <asp:ListItem Text="Chinese" Value="Chinese"></asp:ListItem>
+    <asp:ListItem Text="Japanese" Value="Japanese"></asp:ListItem>
+    <asp:ListItem Text="Korean" Value="Korean"></asp:ListItem>
+    <asp:ListItem Text="Tamil" Value="Tamil"></asp:ListItem>
+    <asp:ListItem Text="Telugu" Value="Telugu"></asp:ListItem>
+    <asp:ListItem Text="Bengali" Value="Bengali"></asp:ListItem>
+    <asp:ListItem Text="Gujarati" Value="Gujarati"></asp:ListItem>
+    <asp:ListItem Text="Punjabi" Value="Punjabi"></asp:ListItem>
+    <asp:ListItem Text="Malayalam" Value="Malayalam"></asp:ListItem>
+                                        
                                     </asp:DropDownList>
+
+                                   
+                                     <asp:RequiredFieldValidator 
+    ID="rfvLanguage" 
+    runat="server" 
+    ControlToValidate="DropDownList1" 
+    InitialValue="" 
+    ErrorMessage="Please select a language" 
+    ForeColor="Red" 
+    Display="Dynamic" />
                                 </div>
+                                
 
                                 <label>Publisher Name</label>
                                 <div class="form-group">
-                                    <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
-                                        <asp:ListItem Text="Publisher1" Value="Publisher1"></asp:ListItem>
-                                        <asp:ListItem Text="Publisher2" Value="Publisher2"></asp:ListItem>
+                                   <asp:DropDownList CssClass="form-control" ID="DropDownList2" runat="server" EnableViewState="true">
+</asp:DropDownList>
+<asp:RequiredFieldValidator 
+    ID="RequiredFieldValidator1" 
+    runat="server" 
+    ControlToValidate="DropDownList2" 
+    InitialValue="" 
+    ErrorMessage="Please select a Publisher Name" 
+    ForeColor="Red" 
+    Display="Dynamic" />
 
-                                    </asp:DropDownList>
+                                    
                                 </div>
 
                             </div>
@@ -266,15 +305,26 @@
                             <div class="col-md-4">
                                 <label>Author Name</label>
                                 <div class="form-group">
-                                    <asp:DropDownList class="form-control" ID="DropDownList3" runat="server">
-                                        <asp:ListItem Text="A1" Value="A1"></asp:ListItem>
-                                        <asp:ListItem Text="a2" Value="a2"></asp:ListItem>
+                                    <asp:DropDownList class="form-control" ID="DropDownList3" runat="server" EnableViewState="true">
+                                                                               
+                                        
                                     </asp:DropDownList>
+                                     <asp:RequiredFieldValidator 
+    ID="RequiredFieldValidator2" 
+    runat="server" 
+    ControlToValidate="DropDownList3" 
+    InitialValue="" 
+    ErrorMessage="Please select an Author Name" 
+    ForeColor="Red" 
+    Display="Dynamic" />
+
                                 </div>
 
                                 <label>Publisher Date</label>
                                 <div class="form-group">
                                     <asp:TextBox class="form-control" ID="TextBox1" runat="server" placeholder="Publisher Date" TextMode="Date"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvDate" runat="server" ControlToValidate="TextBox1"
+    ErrorMessage="Publisher Date is required" ForeColor="Red" Display="Dynamic" />
 
                                 </div>
                             </div>
@@ -319,6 +369,14 @@
                                         <asp:ListItem Text="Language and Literature" Value="LanguageLiterature" />
                                         <asp:ListItem Text="Exam Preparation" Value="ExamPrep" />
                                     </asp:ListBox>
+                                    <asp:RequiredFieldValidator
+            ID="rfvGenre"
+            runat="server"
+            ControlToValidate="ListBox1"
+            InitialValue=""
+            ErrorMessage="Please select at least one genre."
+            ForeColor="Red"
+            Display="Dynamic" />
                                 </div>
                             </div>
                         </div>
@@ -330,12 +388,21 @@
                                     <label>Edition</label>
                                     <div class="form-group">
                                         <asp:TextBox CssClass="form-control" ID="TextBox9" runat="server" placeholder="Edition"  ></asp:TextBox>
+                                  
+                                        
+                                    <asp:RequiredFieldValidator ID="rfvEdition" runat="server" ControlToValidate="TextBox9" 
+            ErrorMessage="Edition is required" ForeColor="Red" Display="Dynamic" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label>Book Cost(per unit)</label>
                                     <div class="form-group">
                                         <asp:TextBox class="form-control" ID="TextBox10" runat="server" placeholder="Book Cost(per unit)" TextMode="Number" ></asp:TextBox>
+                                         <asp:RequiredFieldValidator ID="rfvCost" runat="server" ControlToValidate="TextBox10" 
+            ErrorMessage="Book Cost is required" ForeColor="Red" Display="Dynamic" />
+        <asp:RangeValidator ID="rvBookCost" runat="server" ControlToValidate="TextBox10"
+            MinimumValue="1" MaximumValue="10000" Type="Integer" ErrorMessage="Cost must be between 1 and 10000"
+            ForeColor="Red" Display="Dynamic" />
                                     </div>
                                 </div>
 
@@ -343,6 +410,13 @@
                                     <label>Pages</label>
                                     <div class="form-group">
                                         <asp:TextBox CssClass="form-control" ID="TextBox11" runat="server" placeholder="Pages" TextMode="Number" ></asp:TextBox>
+                                   
+                                     <asp:RequiredFieldValidator ID="rfvPages" runat="server" ControlToValidate="TextBox11" 
+            ErrorMessage="Number of Pages is required" ForeColor="Red" Display="Dynamic" />
+        <asp:RangeValidator ID="rvPages" runat="server" ControlToValidate="TextBox11" 
+            MinimumValue="1" MaximumValue="10000" Type="Integer" ErrorMessage="Pages must be between 1 and 10000"
+            ForeColor="Red" Display="Dynamic" />    
+                                    
                                     </div>
                                 </div>
 
@@ -357,6 +431,13 @@
                                     <label>Actual Stock</label>
                                     <div class="form-group">
                                         <asp:TextBox CssClass="form-control" ID="TextBox2" runat="server" placeholder="Actual Stock" TextMode="Number" ></asp:TextBox>
+                                   <asp:RequiredFieldValidator ID="rfvActualStock" runat="server" ControlToValidate="TextBox2" 
+                ErrorMessage="Actual Stock is required" ForeColor="Red" Display="Dynamic" />
+            <asp:RangeValidator ID="rvActualStock" runat="server" ControlToValidate="TextBox2" 
+                MinimumValue="1" MaximumValue="10000" Type="Integer" ErrorMessage="Actual Stock must be between 1 and 10000"
+                ForeColor="Red" Display="Dynamic" />
+                                        
+                                    
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -381,7 +462,9 @@
                                     <label>Book Description</label>
                                     <div class="form-group">
                                         <asp:TextBox CssClass="form-control" ID="TextBox5" runat="server" placeholder="Book Description"  TextMode="MultiLine" Rows="2"></asp:TextBox>
-                                    </div>
+                                    <asp:RequiredFieldValidator ID="rfvDescription" runat="server" ControlToValidate="TextBox5" 
+                ErrorMessage="Book Description is required" ForeColor="Red" Display="Dynamic" />
+        </div>
 
                                 </div>
                             </div>
@@ -403,7 +486,7 @@
 
                             </div>
                         </div>
-                    <a href="homepage.aspx" class="home-link"> Back to Home</a><br />
+                    <a href="homepage.aspx" class="home-link" CausesValidation="false"> Back to Home</a><br />
                     
                     </div>
                     
@@ -476,6 +559,8 @@
                                               &nbsp;| Edition - <asp:Label ID="Label8" runat="server" Text='<%# Eval("edition") %>' Font-Bold="True"></asp:Label>
 
                                           </div>
+
+                                         
                                       </div>
 
                                       <div class="row">

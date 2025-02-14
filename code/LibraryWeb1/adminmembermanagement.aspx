@@ -5,6 +5,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
+    
+  
+
+  
+   
+
     <script type="text/javascript">
         $(document).ready(function () {
             var table = $('#<%= GridView1.ClientID %>');
@@ -61,8 +67,9 @@
                          <div class="row">
                             <div class="col">
                                 <center>
-                                    <img width="100px" src="img2/user.png" />
+                                    <img width="100px" src="img/id-card_3277444.png"  />
                                 </center>
+                                
                             </div>
                         </div>
 
@@ -78,8 +85,11 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                      <asp:TextBox cssClass="form-control " ID="TextBox3" runat="server"  placeholder="Member ID"></asp:TextBox>
-                                     <asp:LinkButton ID="LinkButton4"  class="btn btn-primary " runat="server" OnClick="LinkButton4_Click">Go</asp:LinkButton>
+                                        
+                                     <asp:LinkButton ID="LinkButton4"  class="btn btn-primary " runat="server" OnClick="LinkButton4_Click" CausesValidation="false" >Go</asp:LinkButton>
                                 </div>
+                                    <asp:RequiredFieldValidator ID="rfvMemberID" runat="server" ControlToValidate="TextBox3"
+                                ErrorMessage="Member ID is required" ForeColor="Red" Display="Dynamic" />
                              </div>
                           </div>
                             <div class="col-md-4">

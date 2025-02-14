@@ -219,7 +219,7 @@
                          <div class="row">
                             <div class="col">
                                 <center>
-                                    <img width="100px" src="img2/user.png" />
+                                    <img width="100px"src="img/learning_4696159.png"/>
                                 </center>
                             </div>
                         </div>
@@ -235,6 +235,8 @@
                                     <label>Member ID</label>
                                 <div class="form-group">
                                     <asp:TextBox cssClass="form-control"  ID="TextBox4" runat="server"   placeholder="Member ID"  ></asp:TextBox>
+                                <asp:RequiredFieldValidator ControlToValidate="TextBox4" ForeColor="Red" runat="server" ErrorMessage="Member ID is required."></asp:RequiredFieldValidator>
+    
                                 </div>
                             </div>
 
@@ -243,8 +245,10 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                      <asp:TextBox cssClass="form-control" ID="TextBox3" runat="server"  placeholder="Book ID"></asp:TextBox>
-                                     <asp:Button class="btn btn-primary  " ID="Button1" runat="server" Text="Go " OnClick="Button1_Click" />
+                                     <asp:Button class="btn btn-primary  " ID="Button1" runat="server" Text="Go " OnClick="Button1_Click" CausesValidation="false"  />
                                 </div>
+                                                                        <asp:RequiredFieldValidator ControlToValidate="TextBox3" ForeColor="Red" runat="server" ErrorMessage="Book ID is required."></asp:RequiredFieldValidator>
+
                              </div>
                           </div>
                         </div>
@@ -273,6 +277,9 @@
                                     <label>Start Date</label>
                                 <div class="form-group">
                                     <asp:TextBox cssClass="form-control"  ID="TextBox5" runat="server"   placeholder="Start Date" TextMode="Date"   ></asp:TextBox>
+                                
+                                <asp:RequiredFieldValidator ControlToValidate="TextBox5" ForeColor="Red" runat="server" ErrorMessage="Start Date is required."></asp:RequiredFieldValidator>
+
                                 </div>
                             </div>
 
@@ -280,6 +287,9 @@
                                     <label>Due Date</label>
                                 <div class="form-group">
                                     <asp:TextBox cssClass="form-control"  ID="TextBox6" runat="server"   placeholder="End Date"   TextMode="Date"></asp:TextBox>
+                               
+                                <asp:RequiredFieldValidator ControlToValidate="TextBox6" ForeColor="Red" runat="server" ErrorMessage="Due Date is required."></asp:RequiredFieldValidator>
+                                    <asp:CompareValidator ControlToValidate="TextBox6" ControlToCompare="TextBox5" Operator="GreaterThan" Type="Date" ForeColor="Red" runat="server" ErrorMessage="Due Date must be after Start Date."></asp:CompareValidator>    
                                 </div>
                             </div>  
                         </div>
@@ -292,12 +302,12 @@
                                 <asp:Button ID="Button2" class="btn btn-lg btn-block btn-primary" runat="server" Text="Issue" OnClick="Button2_Click"></asp:Button>   
                             </div>
                             <div class="col-6">
-                                <asp:Button ID="Button3" class="btn btn-lg btn-block btn-success" runat="server" Text="Return" OnClick="Button3_Click"></asp:Button>   
+                                <asp:Button ID="Button3" class="btn btn-lg btn-block btn-success" runat="server"  CausesValidation="false" Text="Return" OnClick="Button3_Click"></asp:Button>   
                             </div>
                             
                        </div>
                 </div>
-                <a href="homepage.aspx" class="home-link"> Back to Home</a>
+                <a href="homepage.aspx" class="home-link" CausesValidation="false"> Back to Home</a>
             </div>
                 
       <br />           

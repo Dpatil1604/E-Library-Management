@@ -20,7 +20,9 @@ namespace LibraryWeb1
             {
                 BindGridView();
                 fillAuthorPublisherValues();
-               
+
+
+
             }
         }
 
@@ -379,6 +381,9 @@ namespace LibraryWeb1
                             DropDownList3.DataSource = dt;
                             DropDownList3.DataValueField = "author_name";
                             DropDownList3.DataBind();
+
+                            // Add a default "Select" item at the top
+                            DropDownList3.Items.Insert(0, new ListItem("Select Author", ""));
                         }
                     }
                     query = "SELECT publisher_name FROM publisher_master;";
@@ -391,6 +396,10 @@ namespace LibraryWeb1
                             DropDownList2.DataSource = dt;
                             DropDownList2.DataValueField = "publisher_name";
                             DropDownList2.DataBind();
+
+
+                            // Ensure "Select Publisher" remains at the top
+                            DropDownList2.Items.Insert(0, new ListItem("Select Publisher", ""));
                         }
                     }
                 }
