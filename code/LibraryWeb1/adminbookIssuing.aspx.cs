@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net.Mail;
+using System.Net;
+
 
 namespace LibraryWeb1
 {
@@ -18,6 +21,14 @@ namespace LibraryWeb1
             if (!IsPostBack)
             {
                 BindGridView();
+                // Call the function only if it's the first load of the day
+                if (Application["LastDefaulterEmailCheck"] == null ||
+                    ((DateTime)Application["LastDefaulterEmailCheck"]).Date != DateTime.Now.Date)
+                {
+                    SendEmailToDefaulters();
+                    Application["LastDefaulterEmailCheck"] = DateTime.Now;
+                }
+
             }
         }
 
@@ -121,6 +132,98 @@ namespace LibraryWeb1
 
         }
         //user defined function
+
+        void SendEmailToDefaulters()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed) con.Open();
+
+                    string query = @"
+                SELECT DISTINCT mm.member_id, mm.full_name, mm.email 
+                FROM member_master mm
+                INNER JOIN book_issue bi ON mm.member_id = bi.member_id
+                WHERE bi.due_date < CURDATE()
+                AND mm.email IS NOT NULL AND mm.email <> ''
+                AND (mm.last_email_sent_date IS NULL OR mm.last_email_sent_date < CURDATE())";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string memberId = reader["member_id"].ToString();
+                                string fullName = reader["full_name"].ToString();
+                                string email = reader["email"].ToString();
+
+                                if (SendEmail(email, fullName))
+                                {
+                                    UpdateLastEmailSentDate(memberId);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Email Error: " + ex.Message + "');</script>");
+            }
+        }
+
+        bool SendEmail(string recipientEmail, string recipientName)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage
+                {
+                    From = new MailAddress("greenfieldlibrary04@gmail.com"),
+                    Subject = "Library Due Notice",
+                    Body = $"Dear {recipientName},\n\nYou have overdue books. Please return them immediately to avoid account deactivation.\n\nThank you.",
+                    IsBodyHtml = false
+                };
+                mail.To.Add(recipientEmail);
+
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential("greenfieldlibrary04@gmail.com", "zzpj edlh qyvj dkbd"),
+                    EnableSsl = true
+                };
+
+                smtp.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"<script>alert('Failed to send email to {recipientEmail}: {ex.Message}');</script>");
+                return false;
+            }
+        }
+
+        void UpdateLastEmailSentDate(string memberId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed) con.Open();
+
+                    string updateQuery = "UPDATE member_master SET last_email_sent_date = CURDATE() WHERE member_id = @memberId";
+                    using (MySqlCommand cmd = new MySqlCommand(updateQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@memberId", memberId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Failed to update last email date: " + ex.Message + "');</script>");
+            }
+        }
 
 
 

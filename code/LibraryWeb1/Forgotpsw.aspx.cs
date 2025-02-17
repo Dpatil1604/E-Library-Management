@@ -82,8 +82,8 @@ namespace LibraryWeb1
         {
             try
             {
-                string fromEmail = "dp9419933@gmail.com"; // Your Gmail address
-                string appPassword = "sopo wscs kivm gvuh"; // Your App Password
+                string fromEmail = "greenfieldlibrary04@gmail.com"; // Your Gmail address
+                string appPassword = "zzpj edlh qyvj dkbd"; // Your App Password
 
                 string resetLink = $"https://localhost:44317/ResetPsw.aspx?Uid={guid}";
 

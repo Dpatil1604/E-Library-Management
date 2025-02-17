@@ -135,7 +135,7 @@
         <h3>Get in Touch</h3>
         <p>We're always happy to hear from you! Drop us an email, and we'll get back to you as soon as possible.</p>
         <div class="email">
-            <a href="mailto:library@greenfield.edu">library@greenfield.edu</a>
+            <a href="mailto:greenfieldlibrary04@gmail.com">greenfieldlibrary04@gmail.com</a>
         </div>
     </div>
             <br />
