@@ -7,9 +7,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Net.Mail;
-using System.Net;
-
 
 namespace LibraryWeb1
 {
@@ -21,14 +18,6 @@ namespace LibraryWeb1
             if (!IsPostBack)
             {
                 BindGridView();
-                // Call the function only if it's the first load of the day
-                if (Application["LastDefaulterEmailCheck"] == null ||
-                    ((DateTime)Application["LastDefaulterEmailCheck"]).Date != DateTime.Now.Date)
-                {
-                    SendEmailToDefaulters();
-                    Application["LastDefaulterEmailCheck"] = DateTime.Now;
-                }
-
             }
         }
 
@@ -53,6 +42,9 @@ namespace LibraryWeb1
 
                             GridView1.DataSource = dt; // Using your specified GridView ID
                             GridView1.DataBind();
+
+                            // Check for overdue books and send notifications
+                            CheckForOverdueBooks(dt);
                         }
                     }
                 }
@@ -62,6 +54,170 @@ namespace LibraryWeb1
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
         }
+
+        private void CheckForOverdueBooks(DataTable dt)
+        {
+            DateTime today = DateTime.Today;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                DateTime dueDate = Convert.ToDateTime(row["due_date"]);
+                string memberId = row["member_id"].ToString();
+
+                // If the due date is passed and the notification hasn't been sent
+                if (today > dueDate && Convert.ToBoolean(row["notification_sent"]) == false)
+                {
+                    SendOverdueNotification(memberId, dueDate);
+
+                    // Set user status to 'deactive' after overdue
+                    SetUserStatusToDeactive(memberId);
+
+                    // Update the notification_sent flag to true
+                    UpdateNotificationStatus(memberId);
+                }
+            }
+        }
+
+
+        private void UpdateNotificationStatus(string memberId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    MySqlCommand cmd = new MySqlCommand("UPDATE book_issue SET notification_sent = 1 WHERE member_id = @memberId", con);
+                    cmd.Parameters.AddWithValue("@memberId", memberId);
+
+                    int result = cmd.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        Response.Write("<script>alert('Notification status updated');</script>");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error updating notification status: " + ex.Message + "');</script>");
+            }
+        }
+
+
+        private void SetUserStatusToDeactive(string memberId)
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                        //Response.Write("<script>alert('Connection opened successfully');</script>");
+                    }
+
+                    string query = "UPDATE member_master SET account_status = 'deactive' WHERE member_id = @memberId";
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@memberId", memberId);
+
+                    int result = cmd.ExecuteNonQuery();
+                    if (result > 0)
+                    {
+                        Response.Write("<script>alert('User status set to Deactive');</script>");
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('No rows updated. Please verify the Member ID.');</script>");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+            }
+        }
+
+
+
+
+
+
+        private void SendOverdueNotification(string memberId, DateTime dueDate)
+        {
+            try
+            {
+                // Get member email from the database
+                string memberEmail = GetMemberEmail(memberId);
+
+                if (!string.IsNullOrEmpty(memberEmail))
+                {
+                    // Create the email message
+                    var mailMessage = new System.Net.Mail.MailMessage();
+                    mailMessage.From = new System.Net.Mail.MailAddress("greenfieldlibrary04@gmail.com");
+                    mailMessage.To.Add(memberEmail);
+                    mailMessage.Subject = "Overdue Book Notification";
+                    mailMessage.Body = $"Dear Member, your book is overdue. It was due on {dueDate.ToShortDateString()}.";
+
+                    // Set up the SMTP client
+                    var smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com")
+                    {
+                        Port = 587,
+                        Credentials = new System.Net.NetworkCredential("greenfieldlibrary04@gmail.com", "zzpj edlh qyvj dkbd"),
+                        EnableSsl = true,
+                    };
+
+                    // Send the email
+                    smtpClient.Send(mailMessage);
+
+
+                    // Log success
+                    Response.Write("<script>alert('Overdue Notification Sent');</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error in sending notification: " + ex.Message + "');</script>");
+            }
+        }
+
+        private string GetMemberEmail(string memberId)
+        {
+            string email = string.Empty;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(strcon))
+                {
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+
+                    MySqlCommand cmd = new MySqlCommand("SELECT email FROM elibrarydb.member_master WHERE member_id = @memberId", con);
+                    cmd.Parameters.AddWithValue("@memberId", memberId);
+
+                    email = cmd.ExecuteScalar()?.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error fetching email: " + ex.Message + "');</script>");
+            }
+
+            return email;
+        }
+
+
+
+
+
+
+
+
         //go button
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -132,98 +288,6 @@ namespace LibraryWeb1
 
         }
         //user defined function
-
-        void SendEmailToDefaulters()
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(strcon))
-                {
-                    if (con.State == ConnectionState.Closed) con.Open();
-
-                    string query = @"
-                SELECT DISTINCT mm.member_id, mm.full_name, mm.email 
-                FROM member_master mm
-                INNER JOIN book_issue bi ON mm.member_id = bi.member_id
-                WHERE bi.due_date < CURDATE()
-                AND mm.email IS NOT NULL AND mm.email <> ''
-                AND (mm.last_email_sent_date IS NULL OR mm.last_email_sent_date < CURDATE())";
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string memberId = reader["member_id"].ToString();
-                                string fullName = reader["full_name"].ToString();
-                                string email = reader["email"].ToString();
-
-                                if (SendEmail(email, fullName))
-                                {
-                                    UpdateLastEmailSentDate(memberId);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Email Error: " + ex.Message + "');</script>");
-            }
-        }
-
-        bool SendEmail(string recipientEmail, string recipientName)
-        {
-            try
-            {
-                MailMessage mail = new MailMessage
-                {
-                    From = new MailAddress("greenfieldlibrary04@gmail.com"),
-                    Subject = "Library Due Notice",
-                    Body = $"Dear {recipientName},\n\nYou have overdue books. Please return them immediately to avoid account deactivation.\n\nThank you.",
-                    IsBodyHtml = false
-                };
-                mail.To.Add(recipientEmail);
-
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
-                {
-                    Credentials = new NetworkCredential("greenfieldlibrary04@gmail.com", "zzpj edlh qyvj dkbd"),
-                    EnableSsl = true
-                };
-
-                smtp.Send(mail);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Response.Write($"<script>alert('Failed to send email to {recipientEmail}: {ex.Message}');</script>");
-                return false;
-            }
-        }
-
-        void UpdateLastEmailSentDate(string memberId)
-        {
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(strcon))
-                {
-                    if (con.State == ConnectionState.Closed) con.Open();
-
-                    string updateQuery = "UPDATE member_master SET last_email_sent_date = CURDATE() WHERE member_id = @memberId";
-                    using (MySqlCommand cmd = new MySqlCommand(updateQuery, con))
-                    {
-                        cmd.Parameters.AddWithValue("@memberId", memberId);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Failed to update last email date: " + ex.Message + "');</script>");
-            }
-        }
 
 
 
@@ -541,45 +605,29 @@ namespace LibraryWeb1
         {
             try
             {
-                // Ensure the row is a data row
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    // Assuming the "due_date" is in the 5th column, adjust if necessary
-                    string dueDateString = e.Row.Cells[5].Text; // Adjust the index based on where your due_date is
-
-                    // Validate and parse the due date string
-                    if (!string.IsNullOrEmpty(dueDateString))
+                    string dueDateString = e.Row.Cells[5].Text; // Adjust based on your column index
+                    DateTime dueDate;
+                    if (DateTime.TryParse(dueDateString, out dueDate))
                     {
-                        DateTime dueDate;
-                        if (DateTime.TryParse(dueDateString, out dueDate)) // Ensure proper date parsing
-                        {
-                            DateTime today = DateTime.Today; // Current date without time
+                        DateTime today = DateTime.Today;
 
-                            // If the due date has passed, change the row color
-                            if (today > dueDate)
-                            {
-                                e.Row.BackColor = System.Drawing.Color.PaleVioletRed; // Highlight overdue rows
-                            }
-                        }
-                        else
+                        if (today > dueDate)
                         {
-                            // Optionally, handle invalid date formats by setting a default color or alerting
-                            e.Row.BackColor = System.Drawing.Color.LightYellow; // Invalid date formatting
+                            // Highlight overdue books
+                            e.Row.BackColor = System.Drawing.Color.PaleVioletRed; // Overdue color
+                            e.Row.Cells[5].Text += " (Overdue)"; // Append "(Overdue)" text to the due date column
                         }
-                    }
-                    else
-                    {
-                        // Handle empty due_date fields if necessary
-                        e.Row.BackColor = System.Drawing.Color.LightYellow; // For empty due_date
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log or display the exception message for debugging
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
         }
+
 
 
     }

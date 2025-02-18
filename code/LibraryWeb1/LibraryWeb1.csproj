@@ -2357,13 +2357,16 @@
     <Content Include="img2\signup bg.png" />
     <Content Include="img2\u1.jpg" />
     <Content Include="img2\user.png" />
+    <Content Include="img\add-friend.png" />
     <Content Include="img\adminuser.png" />
     <Content Include="img\book-online.png" />
     <Content Include="img\books.png" />
     <Content Include="img\books1.png" />
+    <Content Include="img\si.png" />
     <Content Include="img\defaulters-list.png" />
     <Content Include="img\digital-data.png" />
     <Content Include="img\digital-inventory.png" />
+    <Content Include="img\form.png" />
     <Content Include="img\generaluser.png" />
     <Content Include="img\home-bg.jpg" />
     <Content Include="img\icons8-author-50 %281%29.png" />

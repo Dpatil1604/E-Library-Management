@@ -212,7 +212,7 @@
     <div class="container ">
         <!-- User Icon -->
         <div class="text-center mb-3">
-            <img width="100px" src="img2/user.png" alt="User Icon" />
+            <img width="100px" src="img/si.png" alt="User Icon" />
         </div>
 
         <!-- Title -->

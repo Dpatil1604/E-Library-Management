@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img width="100px" src="img2/user.png" />
+                                    <img width="100px" src="img/add-friend.png" />
                                 </center>
                             </div>
 
@@ -350,7 +350,7 @@
    }
     .card {
     border: none;
-    border-radius: 10px;
+    border-radius: 0px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow */
     background-color: #FFF5EE; /* White background */
     transition: transform 0.2s, box-shadow 0.3s;
