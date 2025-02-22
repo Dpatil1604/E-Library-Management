@@ -195,7 +195,7 @@
                     <a href="Forgotpsw.aspx" class="forgot-link"  style =" text-decoration: none; font-weight: bold;">Forgot Password?</a>
                 </div>
                 <!-- Back to Home Link -->
-                <a href="homepage.aspx" class="home-link" style=" text-decoration: none; font-weight: bold; display: block; text-align: right; margin-top: 10px;">Back to Home</a>
+                <a href="homepage.aspx" class="home-link" style=" text-decoration: none; font-weight: bold; display: block; text-align: right; margin-top: 10px;" CausesValidation="false">Back to Home</a>
             </div>
         </div>
     </div>

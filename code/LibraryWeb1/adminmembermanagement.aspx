@@ -185,7 +185,7 @@
                             
                        </div>
                 </div>
-               <a href="homepage.aspx" class="home-link"> Back to Home</a>
+               <a href="homepage.aspx" class="home-link" CausesValidation="false"> Back to Home</a>
             </div>
                 
 </div>
@@ -274,14 +274,21 @@
             background-color: #007bff;
             color: #fff;
         }
-        .home-link {
-            color: #40C4FF;
+       .home-link {
+     color: #40C4FF;
             text-decoration: none;
             font-weight: bold;
             text-align: right;
             margin-top: 5px;
             margin-right: 15px;
-        }
+}
+
+
+ /* Hover Effect */
+  .home-link:hover {
+        text-decoration: underline;
+    }
+
     </style>
 
 

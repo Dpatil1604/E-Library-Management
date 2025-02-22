@@ -27,9 +27,7 @@
         margin: 0;
         padding: 0;
     }
-    .container-fluid {
-        padding: 0px;
-    }
+    
     .card {
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -161,25 +159,29 @@
     
 
           //file upload
-          function readURL(input) {
-              if (input.files && input.files[0]) {
-                  var reader = new FileReader();
+         function readURL(input) {
+             if (input.files && input.files[0]) {
+                 var reader = new FileReader();
 
 
-                  reader.onload = function (e) {
-                      $('#imgview').attr('src', e.target.result);
-                  };
+                 reader.onload = function (e) {
+                     $('#imgview').attr('src', e.target.result);
+                 };
 
-                  reader.readAsDataURL(input.files[0]);
-
-              }
-          }
+                 reader.readAsDataURL(input.files[0]);
 
 
+             }
+         }
+
+              
+          
 
 
 
-      </script>
+
+
+     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -218,7 +220,9 @@
                                 <asp:FileUpload  onchange="readURL(this);" class="form-control" ID="FileUpload1" runat="server" />
                                 <asp:RequiredFieldValidator ID="rfvFileUpload" runat="server" ControlToValidate="FileUpload1"
     ErrorMessage="Please upload a book image" ForeColor="Red" Display="Dynamic" />
-                            </div>
+
+                               
+</div>
                         </div>
 
                         <div class="row">
@@ -227,7 +231,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <asp:TextBox CssClass="form-control " ID="TextBox3" runat="server" placeholder="Book ID"></asp:TextBox>
-                                        <asp:Button ID="Button4" runat="server" class="btn  btn-primary" Text="Go" OnClick="Button4_Click" />
+                                        <asp:Button ID="Button4" runat="server" class="btn  btn-primary" Text="Go" OnClick="Button4_Click" CausesValidation="false" />
                                     </div>
                                     <asp:RequiredFieldValidator ID="rfvBookID" runat="server" ControlToValidate="TextBox3" 
     ErrorMessage="Book ID is required" ForeColor="Red" Display="Dynamic" />
@@ -477,10 +481,10 @@
 
                                 </div>
                                 <div class="col-4">
-                                    <asp:Button ID="Button2" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete " OnClick="Button2_Click"></asp:Button>
+                                    <asp:Button ID="Button2" class="btn btn-lg btn-block btn-danger" runat="server" Text="Delete " OnClick="Button2_Click" CausesValidation="false"></asp:Button>
                                 </div>
                                 <div class="col-4">
-                                    <asp:Button ID="Button3" class="btn btn-lg btn-block btn-warning" runat="server" Text="Update " OnClick="Button3_Click" ></asp:Button>
+                                    <asp:Button ID="Button3" class="btn btn-lg btn-block btn-warning" runat="server" Text="Update " OnClick="Button3_Click" CausesValidation="false" ></asp:Button>
                                 </div>
 
 
@@ -509,8 +513,9 @@
                                 </div>
                             </div>
 
-                          <div class="row">
+    <div class="row">
     <div class="col">
+        
         <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server"  Width="100%" AutoGenerateColumns="False" Font-Bold="False">
             <Columns>
                 <asp:BoundField DataField="book_id" HeaderText="ID"   >
@@ -595,6 +600,7 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+            
     </div>
 </div>
 

@@ -320,21 +320,19 @@
 
 
      /* Forgot Password & Back to Home Links */
- a.home-link {
-    color: #40C4FF; /* Light Blue */
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-    text-align: right;
-    margin-top: 10px;
-    transition: color 0.3s ease-in-out;
-}
+ .home-link {
+            color: #40C4FF;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 5px;
+            margin-right: 15px;
+        }
 
 /* Hover Effect */
- a.home-link:hover {
-    color: #FFC107; /* Soft Yellow */
-    text-decoration: underline;
-}
+ .home-link:hover {
+        text-decoration: underline;
+    }
 
 
     select.form-control {

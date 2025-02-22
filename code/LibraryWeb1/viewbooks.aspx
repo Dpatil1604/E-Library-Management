@@ -312,7 +312,7 @@ a:hover {
         </div>
 
       <div class="text-center">
-            <a href="homepage.aspx" class="back-button">&laquo; Back to Home</a>
+            <a href="homepage.aspx" class="back-button"> Back to Home</a>
         </div>
 
 

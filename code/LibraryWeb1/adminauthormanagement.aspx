@@ -192,13 +192,7 @@ a:hover {
 }
 
 /* Footer Section */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #f1f1f1;
-    font-size: 14px;
-    color: #343a40;
-}
+
 
 /* Responsive Design */
 @media (max-width: 767px) {
@@ -215,24 +209,20 @@ footer {
         font-size: 12px;
     }
 }
- a.home-link {
-    color: #40C4FF;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-    text-align: right; /* Align text to the right */
-    margin-top: 5px;
-    margin-right: 15px; /* Add space from the right */
-    transition: color 0.3s ease-in-out;
+ .home-link {
+     color: #40C4FF;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 5px;
+            margin-right: 15px;
 }
 
 
  /* Hover Effect */
- a.home-link:hover {
-    color: #FFC107; /* Soft Yellow */
-    text-decoration: underline;
-}
-
+  .home-link:hover {
+        text-decoration: underline;
+    }
 
 
  /* Align search box inline with label */

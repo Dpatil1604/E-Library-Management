@@ -56,9 +56,7 @@
         padding: 0;
     }
 
-    .container-fluid {
-        padding: 0px;
-    }
+  
 
     .card {
         border-radius: 0px;
@@ -348,10 +346,9 @@
 
 
                                 </Columns>
-                                    </asp:GridView>
+                                </asp:GridView>
                                         
-                                      </div>
-
+                                 </div>
                             </div>
                         </div>
 

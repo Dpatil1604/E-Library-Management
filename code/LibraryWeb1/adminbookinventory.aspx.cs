@@ -5,6 +5,7 @@ using System.IO;
 using MySql.Data.MySqlClient;
 using System.Web.UI.WebControls;
 using System.Linq;
+using System.Web.UI;
 
 namespace LibraryWeb1
 {
@@ -87,6 +88,7 @@ namespace LibraryWeb1
         protected void Button4_Click(object sender, EventArgs e)
         {
             gebookbyID();
+
         }
 
         //user defined function
@@ -339,7 +341,11 @@ namespace LibraryWeb1
                                 global_actual_stock = Convert.ToInt32(dt.Rows[0]["actual_stock"].ToString().Trim());
                                 global_current_stock = Convert.ToInt32(dt.Rows[0]["current_stock"].ToString().Trim());
                                 global_issued_book = global_actual_stock - global_current_stock;
-                                global_filepath = dt.Rows[0]["book_img_link"].ToString();
+                                global_filepath = dt.Rows[0]["book_img_link"].ToString().Trim();
+
+                                
+
+                               
 
 
 

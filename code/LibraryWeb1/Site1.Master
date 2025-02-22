@@ -122,7 +122,7 @@
                             <asp:LinkButton class="nav-link" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" CausesValidation="false" >View Books</asp:LinkButton>
                         </li>
                         <li class="nav-item active">
-                            <asp:LinkButton class="nav-link" ID="LinkButton2" runat="server" OnClick="LinkButton2_Click" CausesValidation="false" >User Login  </asp:LinkButton>
+                            <asp:LinkButton class="nav-link" ID="LinkButton2" runat="server" OnClick="LinkButton2_Click" CausesValidation="false" >Member Login  </asp:LinkButton>
                         </li>
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton3" runat="server" OnClick="LinkButton3_Click" CausesValidation="false">Sign Up</asp:LinkButton>
@@ -169,15 +169,7 @@
             </div>
         </div>
     </div>
-   <%-- <div id="footer2" class="container-fluid" style="background: linear-gradient(to right, #002e6e, #0046b4); color: white;">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <p>
-                    &copy; All rights Reserved. <a class="footerlinks" href="#" target="_blank" style="color: lightblue;">Library</a>
-                </p>
-            </div>
-        </div>
-    </div>--%>
+  
 </footer>
 
     </form>
