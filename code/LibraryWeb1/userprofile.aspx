@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img width="100px" src="img/add-friend.png" />
+                                    <img width="100px" src="img/si.png" />
                                 </center>
                             </div>
 

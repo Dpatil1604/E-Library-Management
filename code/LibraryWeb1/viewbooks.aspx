@@ -21,7 +21,7 @@ body {
 
 /* Typography */
 h3 {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 700;
     text-align: center;
     color: #343a40;

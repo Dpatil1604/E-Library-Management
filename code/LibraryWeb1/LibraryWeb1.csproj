@@ -2362,6 +2362,8 @@
     <Content Include="img\book-online.png" />
     <Content Include="img\books.png" />
     <Content Include="img\books1.png" />
+    <Content Include="img\logol.png" />
+    <Content Include="img\logol1.png" />
     <Content Include="img\si.png" />
     <Content Include="img\defaulters-list.png" />
     <Content Include="img\digital-data.png" />
@@ -2369,7 +2371,7 @@
     <Content Include="img\form.png" />
     <Content Include="img\generaluser.png" />
     <Content Include="img\home-bg.jpg" />
-    <Content Include="img\icons8-author-50 %281%29.png" />
+    <Content Include="img\u1.png" />
     <Content Include="img\icons8-author-50.png" />
     <Content Include="img\icons8-author-51 %281%29.png" />
     <Content Include="img\icons8-author-51.png" />

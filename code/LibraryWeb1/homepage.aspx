@@ -3,102 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <!--<section>
-       <img src="img1/p1.jpeg" class="img-fluid" width="1920" height="100" >
-    </section>
-    <section>
-    <div class="container">
-        <div class="row">
-        <div class="col-12">
-            <center>
-                <h2>Our Features</h2>
-                <p><b>Our 3 Primary Features-</b></p>
-            </center>
-
-        </div>
-        </div>
-
-        <div class="row">
-        <div class="col-md-4">
-        <center>
-       <img width="150px" src="img/digital-inventory.png" />
-        <h4>Digital Book Inventory</h4>
-        <p class="text-justify">The Digital Book Inventory streamlines library management with easy cataloging,
-            quick searches, and real-time availability updates, plus alerts for due dates and 
-            access to digital resources.It improves accessibility and enhances the user experience.</p>
-        </center>
-        </div>
-
-            <div class="col-md-4">
-        <center>
-        <img width="150px" src="img/search-online.png" />
-        <h4>Search Books</h4>
-        <p class="text-justify">The Search Books feature allows users to quickly find books by title, author or keywords, 
-            providing filtered results for easy browsing.This enhances the library experience by saving time and helping 
-            users locate resources efficiently.</p>
-        </center>
-        </div>
-
-            <div class="col-md-4">
-        <center>
-        <img width="150px" src="img1/dlist.png" />
-        <h4>Defaulter List</h4>
-        <p class="text-justify">The Defaulter List feature tracks users with overdue books, displaying their names, 
-            due dates, and fines owed. This helps administrators manage late returns effectively and ensures timely
-            reminders for users to avoid penalties.</p>
-        </center>
-        </div>
-        </div>
-    </div>
-        </section>
-
-    <section>
-        <img src="img1/p1.jpeg" class="img-fluid" width="1920" height="200" />
-    </section>
-    <section>
-    <div class="container">
-        <div class="row">
-        <div class="col-12">
-            <center>
-                <h2>Our Process</h2>
-                <p><b>We have a Simple 3 Step Process</b></p>
-            </center>
-
-        </div>
-        </div>
-
-        <div class="row">
-        <div class="col-md-4">
-        <center>
-            <img width="150px" src="img1/sign%20up.png" />
-        
-        <h4>Sign Up</h4>
-        <p class="text-justify">Create a personalized account to access our library’s extensive collection
-            and exclusive features. Just fill in your basic details to register.Enjoy easy tracking of your
-            borrowed books, due date alerts, and personalized recommendations!</center>
-        </div>
-
-            <div class="col-md-4">
-        <center>
-        <img width="150px" src="img/search-online.png" />
-        <h4>Search Books</h4>
-        <p class="text-justify">The Search Books feature allows users to quickly find books by title, author or keywords, 
-            providing filtered results for easy browsing.This enhances the library experience by saving time and helping 
-            users locate resources efficiently.</p>
-        </center>
-        </div>
-
-            <div class="col-md-4">
-        <center>
-        <img width="150px" src="img/library.png" />
-        <h4>Visit Us</h4>
-        <p class="text-justify"> Drop by our library to explore our collection and services in person.
-            Our team is here to assist you with any inquiries and help you find the resources you need!</p>
-        </center>
-        </div>
-        </div>
-    </div>
-        </section>-->
+     
     
 
    
@@ -281,7 +186,7 @@ body {
 
     <!-- Header Section -->
     <header class="header-banner">
-        <h1>Welcome to Our Greenfield Library </h1>
+        <h1>Welcome to Our Greenfield E-Library </h1>
         <p>Manage Books, Search Easily, and Enjoy Reading</p>
     </header>
 

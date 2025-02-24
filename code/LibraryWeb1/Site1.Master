@@ -46,6 +46,8 @@
     nav {
         font-family: 'Poppins', sans-serif;
         //font-weight: bold; /* Makes the text bold */
+  
+
     }
 
     /* General styling for all text on the page */
@@ -83,7 +85,24 @@
     margin-bottom: 10px;
 }
 
-</style>
+   .logo {
+    height: 65px; /* Increase logo size */
+    width: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure proper positioning */
+}
+.navbar-brand {
+   height: 45px; /* Increase navbar height for better spacing */
+    display: flex;
+    align-items: center; /* Center items vertically */
+     gap: 3px; /* Adjust spacing between logo and text */
+     /* Ensure no extra margin */
+}
+
+
+        
+
+
+    </style>
 
 
 
@@ -94,7 +113,7 @@
         <div>
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="#">
-                    <img src="img/books.png" width="30" height="30"  />
+                    <img src="img/logol1.png"   class="logo"/>
                     E-Library
                 </a>
                 
