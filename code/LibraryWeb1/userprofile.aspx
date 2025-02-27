@@ -296,7 +296,17 @@
                          <div class="row" >
                             <div class="col">
                                 <div class="table-responsive"> 
-                                <asp:GridView class="table table-striped table-bordered" ID ="GridView1" runat="server"    OnRowDataBound="GridView1_RowDataBound"></asp:GridView>
+                                <asp:GridView class="table table-striped table-bordered" ID ="GridView1" runat="server" AutoGenerateColumns="False"    OnRowDataBound="GridView1_RowDataBound">
+                                    <Columns>
+        <asp:BoundField DataField="member_id" HeaderText="Member ID" />
+        <asp:BoundField DataField="member_name" HeaderText="Member Name" />
+        <asp:BoundField DataField="book_id" HeaderText="Book ID" />
+        <asp:BoundField DataField="book_name" HeaderText="Book Name" />
+        <asp:BoundField DataField="issue_date" HeaderText="Issue Date" />
+        <asp:BoundField DataField="due_date" HeaderText="Due Date" />
+        
+    </Columns>
+                                </asp:GridView>
                                      <br />
                                     </div>
                             </div>

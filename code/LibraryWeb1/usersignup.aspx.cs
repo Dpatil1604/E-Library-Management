@@ -21,7 +21,7 @@ namespace LibraryWeb1
         {
             if (CheckMemberExists())
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Member already exists with this Member ID. Please try another ID.');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Member ID or Email already exists. Please try a different one.');", true);
             }
             else
             {
@@ -45,18 +45,14 @@ namespace LibraryWeb1
                         con.Open();
                     }
 
-                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM elibrarydb.member_master WHERE member_id ='" + UserIDTextBox.Text.Trim() + "';", con);
-                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
+                    string query = "SELECT COUNT(*) FROM member_master WHERE member_id = @member_id OR email = @Email";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@member_id", UserIDTextBox.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Email", EmailTextBox.Text.Trim());
 
-                    if (dt.Rows.Count >= 1)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        return count > 0; // If count > 0, it means a duplicate email or member_id exists.
                     }
                 }
             }
@@ -66,6 +62,7 @@ namespace LibraryWeb1
                 return false;
             }
         }
+
 
         // Insert a new user into the database
         private void SignUpNewUser()
